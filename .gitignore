@@ -1,0 +1,21 @@
+# 签名密钥（绝对不能提交）
+*.keystore
+*.jks
+*.p12
+
+# 构建产物与历史 APK
+*.apk
+*.apk.idsig
+_build_*/
+build/out/
+dist/
+
+# 中间产物 / 备份
+*.bak
+*.bak_*
+*.pyc
+__pycache__/
+
+# 系统文件
+.DS_Store
+Thumbs.db

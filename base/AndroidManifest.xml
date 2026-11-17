@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:compileSdkVersion="34" android:compileSdkVersionCodename="14" package="com.xsdanser.tv" platformBuildVersionCode="34" platformBuildVersionName="14">
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"/>
+    <uses-feature android:name="android.hardware.touchscreen" android:required="false"/>
+    <uses-feature android:name="android.hardware.type.television" android:required="false"/>
+    <uses-feature android:name="android.software.leanback" android:required="false"/>
+    <queries>
+        <package android:name="com.miui.securitycenter"/>
+        <package android:name="com.coloros.safecenter"/>
+        <package android:name="com.oppo.safe"/>
+        <package android:name="com.huawei.systemmanager"/>
+        <package android:name="com.vivo.permissionmanager"/>
+        <package android:name="com.iflytek.speechcloud"/>
+    </queries>
+    <application android:allowBackup="false" android:banner="@drawable/tv_banner" android:icon="@drawable/ic_launcher" android:label="@string/app_name" android:networkSecurityConfig="@xml/network_security_config" android:theme="@android:style/Theme.Material.Light.NoActionBar" android:usesCleartextTraffic="false">
+        <activity android:configChanges="keyboard|keyboardHidden|navigation|orientation|screenSize" android:exported="true" android:launchMode="singleTask" android:name=".MainActivity" android:screenOrientation="landscape">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LEANBACK_LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="keyboard|keyboardHidden|navigation|orientation|screenSize" android:exported="false" android:name=".SettingsActivity" android:screenOrientation="landscape"/>
+        <activity android:configChanges="keyboard|keyboardHidden|navigation|orientation|screenSize" android:exported="false" android:name=".WrongBookActivity" android:screenOrientation="landscape"/>
+        <activity android:configChanges="keyboard|keyboardHidden|navigation|orientation|screenSize" android:exported="false" android:name=".DonateActivity" android:screenOrientation="landscape"/>
+        <service android:enabled="true" android:exported="false" android:name=".QuizOverlayService" android:foregroundServiceType="specialUse">
+            <property android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE" android:value="家长监护控屏与答题语音提示"/>
+        </service>
+        <receiver android:exported="true" android:name=".BootReceiver" android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:exported="true" android:name=".QuickBootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.QUICKBOOT_POWERON"/>
+                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON"/>
+            </intent-filter>
+        </receiver>
+    </application>
+</manifest>

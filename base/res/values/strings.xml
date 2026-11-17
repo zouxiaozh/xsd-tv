@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_codename">XsdAnser</string>
+    <string name="app_name">学时兑</string>
+    <string name="guard_channel">学时兑</string>
+    <string name="guard_notification_text">到点会弹出全屏答题页</string>
+    <string name="guard_notification_title">学时兑运行中</string>
+</resources>

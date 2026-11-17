@@ -1,0 +1,11 @@
+com.xsdanser.tv:drawable/donate_alipay=0x7f010000
+com.xsdanser.tv:drawable/donate_wechat=0x7f010001
+com.xsdanser.tv:drawable/ic_launcher=0x7f010002
+com.xsdanser.tv:drawable/ic_stat_quiz=0x7f010003
+com.xsdanser.tv:drawable/tv_banner=0x7f010004
+com.xsdanser.tv:string/app_codename=0x7f020000
+com.xsdanser.tv:string/app_name=0x7f020001
+com.xsdanser.tv:string/guard_channel=0x7f020002
+com.xsdanser.tv:string/guard_notification_text=0x7f020003
+com.xsdanser.tv:string/guard_notification_title=0x7f020004
+com.xsdanser.tv:xml/network_security_config=0x7f030000

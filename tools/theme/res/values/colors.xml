@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 窗口底色 = 首页 V10Ui.BG（#0A101C），冷启动不再闪白 -->
+    <color name="app_bg">#FF0A101C</color>
+</resources>

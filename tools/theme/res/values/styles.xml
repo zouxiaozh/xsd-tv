@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+      只覆盖窗口底色，父主题仍是浅色 Material：
+      对话框、系统控件配色与原来完全一致，避免「换成深色主题后弹窗发黑」的回归。
+    -->
+    <style name="AppTheme" parent="@android:style/Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@color/app_bg</item>
+    </style>
+</resources>
