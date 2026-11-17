@@ -3,9 +3,11 @@
 *.jks
 *.p12
 
-# 构建产物与历史 APK
+# 构建产物与历史 APK（apk/ 下的签名安装包例外，需随仓库分发）
 *.apk
 *.apk.idsig
+!apk/
+!apk/*.apk
 _build_*/
 build/out/
 dist/
