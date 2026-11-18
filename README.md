@@ -27,11 +27,6 @@
 
 从 v2.04 起内置「复活监听服务」，v2.05 进一步实现**三条自愈管线**，被系统待机 / 省电策略或一键清理后自动重绑、秒级拉起，**不依赖守护 App**：
 
-1. **通知监听管线** `RevivalListener` —— 监听服务连接断开事件触发自愈
-2. **无障碍管线** `KeepAliveAccessibility` —— 辅助通道检测并恢复组件
-3. **账号同步管线** `KeepAliveSync` —— 隐藏账号 `com.xsdanser.tv.sync` 周期同步（约 60s）兜底
-
-三条管线统一通过 `KeepAlive` 工具类，用 `WRITE_SECURE_SETTINGS` 写回 `enabled_notification_listeners` / `enabled_accessibility_services`，恢复组件并维持账号同步。权限需在首次安装后通过 ADB 一次性开通（`pm grant` 与 `cmd notification allow_listener`），详见官网「权限清单」。**不读取任何通知内容**。
 
 ## 安装（直接装现成 APK）
 
