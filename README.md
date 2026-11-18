@@ -1,51 +1,71 @@
 # 学时兑 · 电视端
 
-一个跑在 Android TV / 安卓盒子上的「答对题才能看电视」应用。到点全屏暂停视频，答对自动放行；答错不罚，先讲解析，倒计时结束重排选项再答。全部功能免费，无广告、无内购。
+> **本 App 永久免费使用**：无广告、无内购、无需注册、不上传作答记录。题库随安装包内置，断网也能出题。
+
+一个跑在 Android TV / 安卓盒子 / 投影仪上的「答对题才能看电视」应用。到点全屏暂停画面，答对自动放行；答错不罚，先讲解析，选项重排再答一次，两次答错记入错题库并自动换题。适配小米、TCL、创维、索尼等主流智能电视，Android 5.0+，已在小米盒子 4 实机验证。
+
+**官网**：<https://xsd.qx47.com/>（介绍、安装说明、题库下载、适配机型、FAQ 全文见本仓库 [`website/`](website/) 目录，可直接双击 `website/index.html` 离线查看）
 
 ## 关键词
 
-电视答题、答对才能看电视、看电视先答题、儿童学习、小学生学习、语文数学、拼音、人教版、一年级到九年级、家长控制、家长设置、看电视时间管理、防沉迷、学习习惯、错题库、知识点出题、启蒙教育、家庭教育、免费无广告、安卓电视、电视盒子、Android TV、智能电视、kids learning、quiz、parental control。
+电视答题、答对才能看电视、看电视先答题、儿童学习、小学生学习、语文数学、拼音、人教版、一年级到九年级、家长控制、家长设置、看电视时间管理、防沉迷、学习习惯、错题库、知识点出题、启蒙教育、家庭教育、免费无广告、永久免费、安卓电视、电视盒子、Android TV、智能电视、kids learning、quiz、parental control。
 
 ## 功能
 
-- 出题频率、每轮题数、答错停留时间均可由家长设置
+- 出题频率、每轮题数、答错停留时间均可由家长设置；默认每 10 分钟 1 题
 - 语文 / 数学 / 英语配比可调，教材版本、年级、学期可切换
+- 10800 道人教版 1–9 年级题内置，覆盖 216 知识点、16 大类；支持中文注音
 - 按知识点大类筛选，错题库自动收集错题
-- 家长设置密码门禁，手机端可远程管理
-- 支持开机自启、守护保活
+- 家长设置密码门禁，手机同 Wi-Fi 扫码远程管理（一次性随机令牌）
+- 两套守护方案：严谨守护（固定频率）/ 自主可控（答题兑换时长）
+- 本地优先：出题、题库、作答全在设备完成；下载新题 / 扫码管理 / 收款码才联网
+- 支持开机自启、后台常驻与进程自愈（见下）
+
+## 常驻保活（v2.05 三管线自愈）
+
+从 v2.04 起内置「复活监听服务」，v2.05 进一步实现**三条自愈管线**，被系统待机 / 省电策略或一键清理后自动重绑、秒级拉起，**不依赖守护 App**：
+
+1. **通知监听管线** `RevivalListener` —— 监听服务连接断开事件触发自愈
+2. **无障碍管线** `KeepAliveAccessibility` —— 辅助通道检测并恢复组件
+3. **账号同步管线** `KeepAliveSync` —— 隐藏账号 `com.xsdanser.tv.sync` 周期同步（约 60s）兜底
+
+三条管线统一通过 `KeepAlive` 工具类，用 `WRITE_SECURE_SETTINGS` 写回 `enabled_notification_listeners` / `enabled_accessibility_services`，恢复组件并维持账号同步。权限需在首次安装后通过 ADB 一次性开通（`pm grant` 与 `cmd notification allow_listener`），详见官网「权限清单」。**不读取任何通知内容**。
 
 ## 安装（直接装现成 APK）
 
-`apk/XsdAnser-v2.03.apk` 是已签名的安装包，可直接安装，无需编译。三种方式任选：
+> 当前最新版 **v2.05（versionCode 33）**：`apk/XsdAnser-v2.05.apk`。历史版本 v2.03 / v2.04 也保留在 `apk/`。
 
 **方式一：手机端守护 App 推送（最省事）**
 
-在手机上安装「学时兑守护」，连上电视后点「安装学时兑到电视」，App 会自动下载并推送安装，不用开电脑、不用 U 盘。
+在手机上安装「学时兑守护」，连上电视后点「安装学时兑到电视」，App 会自动下载并推送安装、补齐权限，不用开电脑、不用 U 盘。
 
 **方式二：ADB 安装（电脑命令行）**
 
 ```bash
 adb connect <电视IP>:5555
-adb install -r -d apk/XsdAnser-v2.03.apk
+adb install -r -d apk/XsdAnser-v2.05.apk
 ```
 
-`-r` 覆盖安装会保留原有设置和学习数据。电视需先在开发者选项里打开「网络调试/ADB 调试」。
+`-r` 覆盖安装会保留原有设置和学习数据。电视需先在开发者选项里打开「网络调试 / ADB 调试」。v2.05 需额外开通保活权限，详见官网安装说明与权限清单。
 
 **方式三：U 盘安装**
 
 把 APK 拷进 U 盘插到电视上，用文件管理器打开安装。需在设置里允许「未知来源」。
 
-首次打开会进入设置向导：选教材版本、年级、出题频率和学科配比，设一个家长密码即可。之后全自动运行。
+首次打开进入设置向导：选教材版本、年级、出题频率和学科配比，设一个家长密码即可。小米盒子需特别注意开启「显示悬浮窗」，否则答题浮层不弹出。
+
+完整安装步骤、各品牌 ADB 入口、权限清单、给 AI 助手的一句话安装提示词，都在官网 `website/index.html` 中。
 
 ## 目录结构
 
 ```
-app/src/com/xsdanser/tv/   应用源码（48 个 Java 文件）
-apk/                       已签名安装包
+app/src/com/xsdanser/tv/   应用源码（52 个 Java 文件，含三管线保活）
+apk/                       已签名安装包（v2.03 / v2.04 / v2.05）
 base/                      基线资源（AndroidManifest、res、assets 题库）
-tools/build_v30_ui.py      主构建脚本
-tools/gen_bank_downloads.py 题库分包生成脚本
+tools/build_v30_ui.py      主构建脚本（dex 注入）
+tools/build_3pipeline.py   三管线保活版本构建脚本
 tools/theme/               自定义启动主题工具链（消除冷启动白屏）
+website/                   官网静态站点（介绍 / 安装说明 / 题库 / FAQ）
 ```
 
 ## 构建
@@ -54,30 +74,25 @@ tools/theme/               自定义启动主题工具链（消除冷启动白�
 
 ```bash
 cd tools
-python build_v30_ui.py
+python build_3pipeline.py     # v2.05 三管线保活版
+# 或
+python build_v30_ui.py        # 基础 UI 版
 ```
 
-脚本会校验：
+脚本会校验版本门禁、主题引用、题库字节一致性。完整构建还需要以下**未随仓库分发**的依赖，请自行准备：
 
-- 版本门禁（versionCode 31 / versionName 2.03）
-- 主题引用必须为 `0x7f050000`（自定义 `AppTheme`）
-- 基线内题库与 `base/assets/xsdanser_bank.db` 字节一致
-
-完整构建还需要以下**未随仓库分发**的依赖，请自行准备：
-
-- `sig-tools/`：JDK 17、Android SDK 14 的 aapt2 / d8 / apksigner / zipalign
+- `sig-tools/`：JDK 17、Android SDK 的 aapt2 / d8 / apksigner / zipalign
 - `toolchain/`：基线 dex 与 stub jar
-- `ZyxAnser-v32-base.apk`：预编译基线包
-- `xsdanser-custom.keystore`：签名密钥（请用自己的密钥替换，勿提交）
+- 预编译基线 APK 与签名 keystore（签名密钥切勿提交）
 
 ## 题库
 
-内置题库 `base/assets/xsdanser_bank.db` 为 SQLite 数据库，`questions` 表共 10800 道人教版 1–9 年级题目。
+内置题库 `base/assets/xsdanser_bank.db` 为 SQLite 数据库，`questions` 表共 10800 道人教版 1–9 年级题目。题库格式规范见 `tools/gen_bank_downloads.py`。
 
-题库格式规范见 `tools/gen_bank_downloads.py`。导入下载包时可覆盖 `topicGroup` 字段来按单元筛题；App 当前不支持按难度等级筛选。
+官网题库下载目录提供现成下载码；目录外可按需求定制任意学科 / 单元 / 知识点（App 本体永久免费，定制题库为可选的付费服务）。
 
 ## 说明
 
-- 本仓库不含签名密钥与个人收款码；`apk/` 下提供已签名的现成安装包。
-- `base/res/drawable-nodpi/` 下的打赏码为占位图，如需启用请自行替换同名文件。
+- **学时兑本体永久免费**；本仓库不含签名密钥与个人收款码。
+- `base/res/drawable-nodpi/` 与 `website/` 中的打赏码 / 作者二维码已替换为占位图。
 - 项目采用自定义主题把启动窗口底色设为与应用一致的深色，消除冷启动白闪。

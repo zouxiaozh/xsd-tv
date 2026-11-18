@@ -522,14 +522,17 @@ TARGET_PATTERNS = ("MainActivity*.class", "SettingsActivity*.class",
                    # v51：720p/1080p/2K/4K/8K 全分辨率统一适配（新类）
                    "ScreenFit*.class",
                    # v62：答题遮罩按屏高定高 + 题干字号收敛（新类，被历史 smali 调用）
-                   "QuizLayout*.class")
+                   "QuizLayout*.class",
+                   # v33(2.04)：通知监听复活服务（新类，借系统绑定秒级复活守护）
+                   "RevivalListener*.class")
 CHECK_FILES = ("MainActivity.java", "SettingsActivity.java", "V10Ui.java",
                "QuizDb.java", "VoiceCoach.java", "QuizMode.java",
                "AnswerShuffle.java", "ReminderBanner.java",
                "WrongBookActivity.java",
                "Pinyin.java", "PinyinData.java", "QrEncoder.java",
                "ManagePage.java", "ManageLock.java", "ManageServer.java",
-               "DonateImages.java", "ScreenFit.java", "QuizLayout.java")
+               "DonateImages.java", "ScreenFit.java", "QuizLayout.java",
+               "RevivalListener.java")
 
 
 # ---------- v35：答错两次规则门禁（两种模式统一） ----------
@@ -1019,6 +1022,133 @@ def patch_manifest_axml(data, replacements):
     return bytes(out)
 
 
+# ---------- 二进制 AXML 插入 <service> 节点（复活监听服务，免 aapt2） ----------
+def insert_revival_service(data, service_cls="com.jager.tvquiz.RevivalListener"):
+    """在二进制 AndroidManifest.xml 的 <application> 内插入一个干净的
+    <service android:name="..." android:exported="false" /> 节点。
+    不依赖 aapt2/资源表：重建字符串池追加类名 + 按 AXML 标准构造节点字节。
+    注：类名用旧包名 com.jager.tvquiz.*，后续 patch_manifest_axml 会统一改成 com.xsdanser.tv.*。
+    """
+    def u16(o): return struct.unpack_from("<H", data, o)[0]
+    def u32(o): return struct.unpack_from("<I", data, o)[0]
+
+    # 读字符串池（池头: type(2) hs(2) size(4) count(4) styleCount(4) flags(4) stringsStart(4) stylesStart(4)）
+    psz = u32(12); sc = u32(16); sstart = u32(28)
+    offs = [u32(36 + i * 4) for i in range(sc)]
+    strings = []
+    for o in offs:
+        q = 8 + sstart + o
+        n = u16(q); q += 2
+        if n & 0x8000:
+            n = ((n & 0x7FFF) << 16) | u16(q); q += 2
+        strings.append(data[q:q + 2 * n].decode("utf-16le"))
+    name_ai = strings.index("name")
+    exported_ai = strings.index("exported")
+    service_ni = strings.index("service")
+
+    # 遍历节点，找 application / service 模板
+    pos = 8; app = None; tmpl = None
+    while pos < len(data) - 8:
+        ct, hs, cs = struct.unpack_from("<HHI", data, pos)
+        step = cs if cs else hs
+        if step <= 0 or pos + step > len(data):
+            break
+        if ct == 0x0102:
+            nm = strings[u32(pos + 20)] if u32(pos + 20) < len(strings) else ""
+            if nm == "application" and app is None:
+                app = (pos, cs)
+            if nm == "service" and tmpl is None:
+                tmpl = pos
+        pos += step
+    assert app and tmpl, "Manifest 缺少 application/service 模板节点"
+    t_line = u32(tmpl + 8)
+    astart = u16(tmpl + 24)
+    and_ns = u32(tmpl + 16 + astart)  # 第一个属性的 ns = android 命名空间索引（attrStart 相对 attrExt@+16）
+
+    # 重建字符串池，追加类名；同时把 versionName 2.03 -> 2.04（复活服务版本）
+    new_strings = ["2.04" if s == "2.03" else s for s in strings]
+    cls_idx = len(new_strings)
+    new_strings.append(service_cls)
+    blob = bytearray(); offs2 = []
+    for s in new_strings:
+        offs2.append(len(blob))
+        enc = s.encode("utf-16le")
+        blob += struct.pack("<H", len(enc) // 2) + enc + b"\x00\x00"
+    while len(blob) % 4:
+        blob += b"\x00"
+    hs = 28
+    sstart2 = hs + 4 * len(new_strings)
+    pool = bytearray()
+    pool += struct.pack("<HHI", 0x0001, hs, sstart2 + len(blob))
+    pool += struct.pack("<IIIII", len(new_strings), 0, 0, sstart2, 0)
+    for o in offs2:
+        pool += struct.pack("<I", o)
+    pool += blob
+    d2 = bytearray(data[:8]) + bytearray(pool) + bytearray(data[8 + psz:])
+    struct.pack_into("<I", d2, 4, len(d2))
+
+    # versionCode 31 -> 32（整数属性，data 字段）
+    vc_i = new_strings.index("versionCode") if "versionCode" in new_strings else -1
+    if vc_i >= 0:
+        p = 8
+        while p < len(d2) - 40:
+            ct2, hs2, cs2 = struct.unpack_from("<HHI", d2, p)
+            step2 = cs2 if cs2 else hs2
+            if step2 <= 0 or p + step2 > len(d2):
+                break
+            if ct2 == 0x0102:
+                ni2 = struct.unpack_from("<I", d2, p + 20)[0]
+                if ni2 < len(new_strings) and new_strings[ni2] == "manifest":
+                    ac2 = struct.unpack_from("<H", d2, p + 28)[0]
+                    ap2 = p + 36
+                    for k2 in range(ac2):
+                        ns2, an2, rv2, rp2, ad2 = struct.unpack_from("<IIIII", d2, ap2)
+                        if an2 == vc_i:
+                            struct.pack_into("<I", d2, ap2 + 16, 32)  # data = 32
+                        ap2 += 20
+                    break
+            p += step2
+
+    # 重新定位 application（字符串池变大，节点后移）
+    d2 = bytes(d2); pos = 8; app2 = None
+    while pos < len(d2) - 8:
+        ct, hs2, cs = struct.unpack_from("<HHI", d2, pos)
+        step = cs if cs else hs2
+        if step <= 0 or pos + step > len(d2):
+            break
+        if ct == 0x0102 and struct.unpack_from("<I", d2, pos + 20)[0] == service_ni:
+            pass
+        if ct == 0x0102:
+            nm_i = struct.unpack_from("<I", d2, pos + 20)[0]
+            if nm_i < len(new_strings) and new_strings[nm_i] == "application":
+                app2 = (pos, cs)
+                break
+        pos += step
+    assert app2, "重建后找不到 application"
+
+    # 构造干净 service 节点
+    n_attr = 2
+    start_cs = 36 + 20 * n_attr
+    st = bytearray()
+    st += struct.pack("<HHI", 0x0102, 16, start_cs)
+    st += struct.pack("<II", t_line, 0xFFFFFFFF)
+    st += struct.pack("<II", 0xFFFFFFFF, service_ni)
+    st += struct.pack("<HHH", 20, 20, n_attr)
+    st += struct.pack("<HHH", 0, 0, 0)
+    st += struct.pack("<IIIII", and_ns, name_ai, cls_idx, (0x03 << 24) | 0x08, cls_idx)
+    st += struct.pack("<IIIII", and_ns, exported_ai, 0xFFFFFFFF, (0x12 << 24) | 0x08, 0)
+    assert len(st) == start_cs
+    et = bytearray()
+    et += struct.pack("<HHI", 0x0103, 16, 24)
+    et += struct.pack("<II", t_line, 0xFFFFFFFF)
+    et += struct.pack("<II", 0xFFFFFFFF, service_ni)
+
+    insert_at = app2[0] + app2[1]
+    out = bytearray(d2[:insert_at]) + st + et + bytearray(d2[insert_at:])
+    struct.pack_into("<I", out, 4, len(out))
+    return bytes(out)
+
+
 def parse_axml(data):
     """从二进制 AndroidManifest.xml 抽取 <manifest> 标签的 versionCode/versionName 等属性。"""
     assert struct.unpack_from("<I", data, 0)[0] == 0x00080003, "不是二进制 AndroidManifest.xml"
@@ -1089,6 +1219,8 @@ MANIFEST_FIX = {
     "com.jager.tvquiz.QuizOverlayService": "com.xsdanser.tv.QuizOverlayService",
     "com.jager.tvquiz.SettingsActivity": "com.xsdanser.tv.SettingsActivity",
     "com.jager.tvquiz.WrongBookActivity": "com.xsdanser.tv.WrongBookActivity",
+    # v33(2.04)：复活监听服务（插入的节点类名，精确替换）
+    "com.jager.tvquiz.RevivalListener": "com.xsdanser.tv.RevivalListener",
 }
 
 # 0) 源码门禁：PIN / 双方案新名 / 无邀请卡 / 无语音 / 规则分组 / 首页新排版
@@ -1363,11 +1495,15 @@ v14_dex = z.read("classes.dex")
 base_manifest = z.read("AndroidManifest.xml")
 z.close()
 assert v14_dex == open(BASEDEX_ORIG, "rb").read(), "基线 APK dex 与原始 base.dex 不一致"
+# v33：插入复活监听 service 节点（通知使用权绑定通道，被清后系统自动重绑秒级复活）
+base_manifest = insert_revival_service(base_manifest)
 patched_manifest = patch_manifest_axml(base_manifest, MANIFEST_FIX)
-# v32 版本门禁：必须升到 31 / 2.03（自定义主题消除冷启动白屏）
+assert "com.xsdanser.tv.RevivalListener".encode("utf-16le") in patched_manifest, \
+       "复活监听 service 未进入 Manifest"
+# 版本门禁：v33 升到 32 / 2.04（复活监听服务）
 _mattrs = parse_axml(patched_manifest)
-assert _mattrs.get("versionCode") == 31, "versionCode 应为 31，实际 %r" % _mattrs.get("versionCode")
-assert _mattrs.get("versionName") == "2.03", "versionName 应为 2.03，实际 %r" % _mattrs.get("versionName")
+assert _mattrs.get("versionCode") == 32, "versionCode 应为 32，实际 %r" % _mattrs.get("versionCode")
+assert _mattrs.get("versionName") == "2.04", "versionName 应为 2.04，实际 %r" % _mattrs.get("versionName")
 assert _mattrs.get("theme") == 0x7f050000, "主题应为 0x7f050000（AppTheme），实际 %r" % _mattrs.get("theme")
 assert _mattrs.get("package") == "com.xsdanser.tv", "包名不应改动"
 assert b"com.iflytek.speechcloud" not in patched_manifest, "Manifest 仍声明讯飞引擎"
@@ -1428,6 +1564,7 @@ data = open(os.path.join(MERGED, "classes.dex"), "rb").read()
 assert b"Lcom/xsdanser/tv/QuizMode;" in data, "QuizMode 类未进 dex"
 assert b"Lcom/xsdanser/tv/AnswerShuffle;" in data, "AnswerShuffle 类未进 dex"
 assert b"Lcom/xsdanser/tv/QuizOverlayService;" in data, "答题服务补丁丢失"
+assert b"Lcom/xsdanser/tv/RevivalListener;" in data, "复活监听服务类未进 dex"
 # v55 方案 A：承载页桥接类必须由 base smali 编译进 dex，且服务调用它（调用关系已由
 # check_host_bridge 在 smali 源码层面校验；此处仅确认类与方法名已进入最终 dex）。
 assert b"Lcom/xsdanser/tv/QuizHost;" in data, "merged dex 缺少 QuizHost（方案 A 承载页桥接）"
@@ -1476,7 +1613,7 @@ for s in ("严谨守护", "自主可控", "当前方案 · ",
           "打开扫码管理", "管理地址", "家长已锁屏", "api/state",
           "api/set", "api/action", "学时兑 · 家长控制台",
           # v33：打赏页作者署名 + 收款码在线加载
-          "请开发者喝一杯咖啡", "收款码在线加载", "DonateImages",
+          "请作者喝一杯咖啡", "收款码在线加载", "DonateImages",
           "https://xsd.qx47.com/app/images/wx.png",
           "https://xsd.qx47.com/app/images/ali.jpg",
           "donate_wechat", "donate_alipay",
@@ -1511,7 +1648,7 @@ must_absent(data, [s.encode("utf-8") for s in
                     "看看正确答案再想一次",
                     "Proof of Homework", "系统权限与启动",
                     # v33：打赏页旧署名必须彻底消失
-                    "作者", "请开发者喝一杯咖啡", "不联网",
+                    "小舟", "请小舟喝一杯咖啡", "不联网",
                     # v27：首页两张方案规则大框的文案必须彻底消失
                     "答题规则 · 两种方案", "点「立即答题」能主动攒",
                     "按出题频率定时出题", "起始时长递减，归零立即停播并出题",

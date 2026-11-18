@@ -1,0 +1,47 @@
+{
+  "version": "sample-1.0",
+  "questions": [
+    {
+      "edition": "人教版",
+      "gradeLabel": "3年级",
+      "grade": 3,
+      "subject": "数学",
+      "term": "全学年",
+      "chapter": "下载码示例",
+      "topic": "示例·两位数加法",
+      "topicGroup": "示例题库",
+      "text": "【下载码示例】27 + 35 = ( )",
+      "options": ["52", "62", "61", "72"],
+      "answerIndex": 1,
+      "explain": "个位 7+5=12，向十位进 1；十位 2+3+1=6，所以 27+35=62。"
+    },
+    {
+      "edition": "人教版",
+      "gradeLabel": "3年级",
+      "grade": 3,
+      "subject": "语文",
+      "term": "全学年",
+      "chapter": "下载码示例",
+      "topic": "示例·标点符号",
+      "topicGroup": "示例题库",
+      "text": "【下载码示例】「你今天去图书馆吗 ( )」括号里应填的标点是",
+      "options": ["。", "！", "？", "，"],
+      "answerIndex": 2,
+      "explain": "这是在提出疑问，句末应该用问号「？」；句号表陈述，叹号表强烈感情，逗号表句中停顿。"
+    },
+    {
+      "edition": "人教版",
+      "gradeLabel": "3年级",
+      "grade": 3,
+      "subject": "英语",
+      "term": "全学年",
+      "chapter": "下载码示例",
+      "topic": "示例·名词单复数",
+      "topicGroup": "示例题库",
+      "text": "【下载码示例】There are three ( ) on the desk.",
+      "options": ["book", "books", "a book", "bookes"],
+      "answerIndex": 1,
+      "explain": "three 后面要接可数名词复数，book 的复数是 books；bookes 是错误拼写。"
+    }
+  ]
+}

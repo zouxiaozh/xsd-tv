@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#070c16">
+<meta name="description" content="学时兑题库下载目录：人教版 1-9 年级上下册数学、语文、英语简单等级题库已随 App 内置，可用下载码在其他设备同步；中等、偏难、难等难度，以及任意学科、某一单元、某个知识点都可以联系作者按需定制，什么题目都能做，完成后凭专属下载码导入。适配小米、TCL、创维、索尼等主流智能电视，也能装在电视盒子与投影仪上。">
+<title>题库下载 · 学时兑</title>
+<link rel="icon" type="image/png" href="assets/img/logo.png">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<!-- 图标精灵 -->
+<svg class="sprite" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H19v16H6.5A2.5 2.5 0 0 0 4 21.5z"/><path d="M4 18.5A2.5 2.5 0 0 1 6.5 16H19"/><path d="M9 7.5h6M9 11h4"/></symbol>
+  <symbol id="i-pinyin" viewBox="0 0 24 24"><path d="M3 18l4.2-11L11.4 18M4.6 14h5.1"/><path d="M16 8v9M16 8.4c1.6-.9 3.4-.5 4 .7.5 1.1.2 2.5-.8 3.4-1.1 1-2.6 1.3-3.2 2.4M18.5 4.2l1 1.6"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><rect x="4" y="3.5" width="16" height="17" rx="2.5"/><path d="M8 8.5h8M8 12.5h8M8 16.5h5"/><path d="m5.5 8 .6.6 1-1.2" stroke-width="1.4"/></symbol>
+  <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2.2"/><circle cx="9" cy="17" r="2.2"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4.5" y="10" width="15" height="10.5" rx="2.5"/><path d="M8 10V7.5a4 4 0 0 1 8 0V10M12 14v2.5"/></symbol>
+  <symbol id="i-qr" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="7" rx="1"/><rect x="13.5" y="3.5" width="7" height="7" rx="1"/><rect x="3.5" y="13.5" width="7" height="7" rx="1"/><path d="M14 14h2.5v2.5H14zM19 14h1.5M14 19h2M19 18v3"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7.5 3v5.5c0 4.6-3 8-7.5 9.5-4.5-1.5-7.5-4.9-7.5-9.5V6z"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3.5v11m0 0 4-4m-4 4-4-4"/><path d="M4.5 17v2A1.5 1.5 0 0 0 6 20.5h12a1.5 1.5 0 0 0 1.5-1.5v-2"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4.5 12h14m0 0-5-5m5 5-5 5"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7"/></symbol>
+  <symbol id="i-tv" viewBox="0 0 24 24"><rect x="2.5" y="4" width="19" height="13.5" rx="2"/><path d="M8 21h8M12 17.5V21"/></symbol>
+  <symbol id="i-wifi" viewBox="0 0 24 24"><path d="M3.5 9a13 13 0 0 1 17 0M6.5 12.5a8.5 8.5 0 0 1 11 0M9.5 16a4 4 0 0 1 5 0"/><circle cx="12" cy="19" r="1" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8.5" y="8.5" width="11" height="11" rx="2"/><path d="M15.5 5.5v-1a1 1 0 0 0-1-1h-9a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h1"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.8v.4"/></symbol>
+</svg>
+
+<div class="scroll-progress" id="progress"></div>
+<div class="aurora" aria-hidden="true">
+  <span class="blob blob-a"></span><span class="blob blob-b"></span><span class="blob blob-c"></span>
+  <span class="grid-mask"></span>
+</div>
+
+<!-- 导航 -->
+<header class="nav" id="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="index.html#top" aria-label="学时兑首页">
+      <img src="assets/img/logo.png" alt="学时兑图标">
+      <span class="brand-text">学时兑<small>XSDANSER</small></span>
+    </a>
+    <nav class="nav-links" id="navLinks" aria-label="主导航">
+      <a href="index.html#intro">产品介绍</a>
+      <a href="index.html#how">工作原理</a>
+      <a href="index.html#features">功能亮点</a>
+      <a href="index.html#screens">界面一览</a>
+      <a href="bank.html" class="active">题库下载</a>
+      <a href="index.html#guard">守护 App</a>
+      <a href="index.html#install">安装说明</a>
+      <a href="index.html#faq">常见问题</a>
+      <a class="nav-menu-download" href="index.html#download">下载 App</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeToggle" aria-label="切换深浅主题" title="切换深浅主题">
+        <svg class="icon"><use href="#i-moon"></use></svg>
+      </button>
+      <a class="btn btn-primary btn-sm nav-download" href="index.html#download">下载 App</a>
+      <button class="icon-btn menu-btn" id="menuBtn" aria-label="展开菜单" aria-expanded="false">
+        <svg class="icon"><use href="#i-menu"></use></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- 页头 -->
+  <section class="section bank-hero" id="bankTop">
+    <div class="container">
+      <div class="eyebrow reveal"><span class="pulse"></span> BANK DOWNLOAD / 题库下载中心</div>
+      <h1 class="reveal">找一套<span class="grad">合适的题</span>，<br>用下载码装进电视。</h1>
+      <p class="lead reveal" data-delay="1">下表现成题库按「教材版本 · 年级 · 学期 · 学科 · 等级」整理，人教版 1–9 年级的简单等级已随 App 内置，也能用下载码同步到其它设备。除此之外<b>什么题目都能定制</b>：难度、任意学科、某一单元、某个知识点，甚至孩子最近总错的某一类题，按你的需求出题，完成后给一个专属下载码导入即可。</p>
+      <div class="bank-chips reveal" data-delay="1">
+        <span><strong>18 套现成题库</strong> · 简单等级已内置</span>
+        <span><strong>四级难度</strong> · 简单 / 中等 / 偏难 / 难</span>
+        <span><strong>任意学科</strong> · 不限语数英</span>
+        <span><strong>单元 / 知识点</strong> · 都能单独出一套</span>
+      </div>
+      <div class="hero-cta reveal" data-delay="2">
+        <a class="btn btn-primary btn-lg" href="#catalog">查看题库目录 <svg class="icon"><use href="#i-arrow"></use></svg></a>
+        <a class="btn btn-ghost btn-lg" href="#custom">按需定制题库</a>
+      </div>
+      <div class="device-line reveal" data-delay="2">
+        <svg class="icon"><use href="#i-tv"></use></svg>
+        <span>适配小米、TCL、创维、索尼等主流智能电视，也能装在电视盒子与投影仪上 · Android 5.0+</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 等级体系 -->
+  <section class="section section-alt" id="levels">
+    <div class="container">
+      <div class="section-head center reveal">
+        <div class="kicker">DIFFICULTY / 难度等级</div>
+        <h2 class="h2">四个等级，<span class="grad">从课内到拔高</span></h2>
+        <p class="sub">公开提供的是「简单」等级；其余三个等级按孩子实际情况单独出题。难度只是定制的一个维度——学科、单元、知识点同样可以指定，详见下方「按需定制」。</p>
+      </div>
+      <div class="level-grid">
+        <article class="level-card lv-easy reveal">
+          <div class="lv-name">简单</div>
+          <span class="lv-state lv-state-ready"><svg class="icon"><use href="#i-check"></use></svg> 已有题库 · 现成可用</span>
+          <p>课内基础题，跟着教材进度走，适合日常「看一会儿、答一题」的约定。人教版 1–9 年级上下册共 10800 题，已随 App 内置。</p>
+          <div class="lv-foot">下载码：见下方目录 · 无需付费</div>
+        </article>
+        <article class="level-card lv-mid reveal" data-delay="1">
+          <div class="lv-name">中等</div>
+          <span class="lv-state lv-state-custom"><svg class="icon"><use href="#i-lock"></use></svg> 需联系作者定制</span>
+          <p>在课内基础上增加变式与一步转换，适合已经能稳定答对基础题、想再多想一下的孩子。</p>
+          <div class="lv-foot">下载码：定制完成后提供</div>
+        </article>
+        <article class="level-card lv-hard reveal" data-delay="2">
+          <div class="lv-name">偏难</div>
+          <span class="lv-state lv-state-custom"><svg class="icon"><use href="#i-lock"></use></svg> 需联系作者定制</span>
+          <p>综合应用与多步推理题，一个题干里串起多个知识点，适合学有余力、需要一点挑战的阶段。</p>
+          <div class="lv-foot">下载码：定制完成后提供</div>
+        </article>
+        <article class="level-card lv-expert reveal" data-delay="2">
+          <div class="lv-name">难</div>
+          <span class="lv-state lv-state-custom"><svg class="icon"><use href="#i-lock"></use></svg> 需联系作者定制</span>
+          <p>拔高与竞赛风格的题目，题量不大但每题都要拐几个弯，建议家长陪着一起看解析。</p>
+          <div class="lv-foot">下载码：定制完成后提供</div>
+        </article>
+      </div>
+      <div class="callout warn reveal">
+        <svg class="icon"><use href="#i-info"></use></svg>
+        <div><strong>关于「已经存在的题库」</strong><p>下表中列出的都是当前已经存在、可以直接使用的题库，等级统一为<b>简单</b>。除此之外没有现成下载码的题，都可以找作者定制：不只是中等 / 偏难 / 难，任意学科、某一单元、某个知识点，或任何你想要的题目都能做；定制完成给一个专属下载码，在 App 里输入即可下载导入。<a class="inline-link" href="#custom">看定制范围</a></p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 题库目录表格 -->
+  <section class="section" id="catalog">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="kicker">CATALOG / 已有题库</div>
+        <h2 class="h2">18 套现成题库，<span class="grad">按年级学期挑</span></h2>
+        <p class="sub">每套含数学、语文、英语各 200 题，共 600 题；覆盖 216 个知识点、16 个大类。下载码即文件名，短码方便在电视上用遥控器输入。</p>
+      </div>
+
+      <div class="bank-toolbar reveal">
+        <span class="toolbar-label">快速筛选</span>
+        <button class="filter-btn active" data-filter="all" type="button">全部 18 套</button>
+        <button class="filter-btn" data-filter="primary" type="button">小学 1–6 年级</button>
+        <button class="filter-btn" data-filter="junior" type="button">初中 7–9 年级</button>
+        <span class="toolbar-count" id="bankCount">当前显示 18 套</span>
+      </div>
+
+      <div class="bank-table-wrap reveal" data-delay="1">
+        <div class="scroll-hint" aria-hidden="true">
+          <svg class="icon sh-left"><use href="#i-arrow"></use></svg>
+          <span>表格可左右滑动查看全部列</span>
+          <svg class="icon"><use href="#i-arrow"></use></svg>
+        </div>
+        <div class="bank-scroll">
+          <table class="bank-table" id="bankTable">
+            <thead>
+              <tr>
+                <th>教材版本</th><th>年级</th><th>学期</th><th>学科</th><th>等级</th><th>下载码</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr data-stage="primary"><td class="bk-strong">人教版</td><td>1 年级</td><td>上册</td><td>数学 · 语文 · 英语</td><td><span class="lv-badge">简单</span></td><td><div class="code-cell"><code>s1a</code><button class="bank-copy" data-copy="s1a" type="button"><svg class="icon"><use href="#i-copy"></use></svg><span>复制</span></button></div></td></tr>
+              <tr data-stage="primary"><td class="bk-strong">人教版</td><td>1 年级</td><td>下册</td><td>数学 · 语文 · 英语</td><td><span class="lv-badge">简单</span></td><td><div class="code-cell"><code>s1b</code><button class="bank-copy" data-copy="s1b" type="button"><svg class="icon"><use href="#i-copy"></use></svg><span>复制</span></button></div></td></tr>
+              <tr data-stage="primary"><td class="bk-strong">人教版</td><td>2 年级</td><td>上册</td><td>数学 · 语文 · 英语</td><td><span class="lv-badge">简单</span></td><td><div class="code-cell"><code>s2a</code><button class="bank-copy" data-copy="s2a" type="button"><svg class="icon"><use href="#i-copy"></use></svg><span>复制</span></button></div></td></tr>
+              <tr data-stage="primary"><td class="bk-strong">人教版</td><td>2 年级</td><td>下册</td><td>数学 · 语文 · 英语</td><td><span class="lv-badge">简单</span></td><td><div class="code-cell"><code>s2b</code><button class="bank-copy" data-copy="s2b" type="button"><svg class="icon"><use href="#i-copy"></use></svg><span>复制</span></button></div></td></tr>
+              <tr data-stage="primary"><td class="bk-strong">人教版</td><td>3 年级</td><td>上册</td><td>数学 · 语文 · 英语</td><td><span class="lv-badge">简单</span></td><td><div class="code-cell"><code>s3a</code><button class="bank-copy" data-copy="s3a" type="button"><svg class="icon"><use href="#i-copy"></use></svg><span>复制</span></button></div></td></tr>
+              <tr data-stage="primary"><td class="bk-strong">人教版</td><td>3 年级</td><td>下册</td><td>数学 · 语文 · 英语</td><td><span class="lv-badge">简单</span></td><td><div class="code-cell"><code>s3b</code><button class="bank-copy" data-copy="s3b" type="button"><svg class="icon"><use href="#i-copy"></use></svg><span>复制</span></button></div></td></tr>
+              <tr data-stage="primary"><td class="bk-strong">人教版</td><td>4 年级</td><td>上册</td><td>数学 · 语文 · 英语</td><td><span class="lv-badge">简单</span></td><td><div class="code-cell"><code>s4a</code><button class="bank-copy" data-copy="s4a" type="button"><svg class="icon"><use href="#i-copy"></use></svg><span>复制</span></button></div></td></tr>
+              <tr data-stage="primary"><td class="bk-strong">人教版</td><td>4 年级</td><td>下册</td><td>数学 · 语文 · 英语</td><td><span class="lv-badge">简单</span></td><td><div class="code-cell"><code>s4b</code><button class="bank-copy" data-copy="s4b" type="button"><svg class="icon"><use href="#i-copy"></use></svg><span>复制</span></button></div></td></tr>
+              <tr data-stage="primary"><td class="bk-strong">人教版</td><td>5 年级</td><td>上册</td><td>数学 · 语文 · 英语</td><td><span class="lv-badge">简单</span></td><td><div class="code-cell"><code>s5a</code><button class="bank-copy" data-copy="s5a" type="button"><svg class="icon"><use href="#i-copy"></use></svg><span>复制</span></button></div></td></tr>
+              <tr data-stage="primary"><td class="bk-strong">人教版</td><td>5 年级</td><td>下册</td><td>数学 · 语文 · 英语</td><td><span class="lv-badge">简单</span></td><td><div class="code-cell"><code>s5b</code><button class="bank-copy" data-copy="s5b" type="button"><svg class="icon"><use href="#i-copy"></use></svg><span>复制</span></button></div></td></tr>
+              <tr data-stage="primary"><td class="bk-strong">人教版</td><td>6 年级</td><td>上册</td><td>数学 · 语文 · 英语</td><td><span class="lv-badge">简单</span></td><td><div class="code-cell"><code>s6a</code><button class="bank-copy" data-copy="s6a" type="button"><svg class="icon"><use href="#i-copy"></use></svg><span>复制</span></button></div></td></tr>
+              <tr data-stage="primary"><td class="bk-strong">人教版</td><td>6 年级</td><td>下册</td><td>数学 · 语文 · 英语</td><td><span class="lv-badge">简单</span></td><td><div class="code-cell"><code>s6b</code><button class="bank-copy" data-copy="s6b" type="button"><svg class="icon"><use href="#i-copy"></use></svg><span>复制</span></button></div></td></tr>
+              <tr data-stage="junior"><td class="bk-strong">人教版</td><td>7 年级</td><td>上册</td><td>数学 · 语文 · 英语</td><td><span class="lv-badge">简单</span></td><td><div class="code-cell"><code>s7a</code><button class="bank-copy" data-copy="s7a" type="button"><svg class="icon"><use href="#i-copy"></use></svg><span>复制</span></button></div></td></tr>
+              <tr data-stage="junior"><td class="bk-strong">人教版</td><td>7 年级</td><td>下册</td><td>数学 · 语文 · 英语</td><td><span class="lv-badge">简单</span></td><td><div class="code-cell"><code>s7b</code><button class="bank-copy" data-copy="s7b" type="button"><svg class="icon"><use href="#i-copy"></use></svg><span>复制</span></button></div></td></tr>
+              <tr data-stage="junior"><td class="bk-strong">人教版</td><td>8 年级</td><td>上册</td><td>数学 · 语文 · 英语</td><td><span class="lv-badge">简单</span></td><td><div class="code-cell"><code>s8a</code><button class="bank-copy" data-copy="s8a" type="button"><svg class="icon"><use href="#i-copy"></use></svg><span>复制</span></button></div></td></tr>
+              <tr data-stage="junior"><td class="bk-strong">人教版</td><td>8 年级</td><td>下册</td><td>数学 · 语文 · 英语</td><td><span class="lv-badge">简单</span></td><td><div class="code-cell"><code>s8b</code><button class="bank-copy" data-copy="s8b" type="button"><svg class="icon"><use href="#i-copy"></use></svg><span>复制</span></button></div></td></tr>
+              <tr data-stage="junior"><td class="bk-strong">人教版</td><td>9 年级</td><td>上册</td><td>数学 · 语文 · 英语</td><td><span class="lv-badge">简单</span></td><td><div class="code-cell"><code>s9a</code><button class="bank-copy" data-copy="s9a" type="button"><svg class="icon"><use href="#i-copy"></use></svg><span>复制</span></button></div></td></tr>
+              <tr data-stage="junior"><td class="bk-strong">人教版</td><td>9 年级</td><td>下册</td><td>数学 · 语文 · 英语</td><td><span class="lv-badge">简单</span></td><td><div class="code-cell"><code>s9b</code><button class="bank-copy" data-copy="s9b" type="button"><svg class="icon"><use href="#i-copy"></use></svg><span>复制</span></button></div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="table-foot reveal">
+        <svg class="icon"><use href="#i-info"></use></svg>
+        <span>这套题库已随 App 内置，装好就能用，通常<b>不需要再下载</b>。下载码用于把同一套题同步到家里第二台电视、盒子或投影仪，或在重装后恢复；App 会自动跳过已存在的题目，不会重复计数。想先试一下导入流程，可以用示例码 <code>sample</code> 或 <code>sample-array</code>。</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 按需定制 -->
+  <section class="section section-alt" id="custom">
+    <div class="container">
+      <div class="section-head center reveal">
+        <div class="kicker">CUSTOM / 按需定制</div>
+        <h2 class="h2">不止四个等级，<span class="grad">什么题都能定制</span></h2>
+        <p class="sub">四个难度只是最粗的一种分法。哪一册、哪一单元、哪个知识点、哪一学科，都可以按孩子当下的需要单独出题；语、数、英之外的学科同样能做，需求说清楚就行。</p>
+      </div>
+      <div class="scope-grid">
+        <article class="scope-card reveal">
+          <span class="scope-icon"><svg class="icon"><use href="#i-sliders"></use></svg></span>
+          <h3>难度等级</h3>
+          <p>简单 / 中等 / 偏难 / 难四级任选，也可以不套等级，直接按孩子水平描述，比如「比课本稍难一点」。</p>
+        </article>
+        <article class="scope-card reveal" data-delay="1">
+          <span class="scope-icon"><svg class="icon"><use href="#i-book"></use></svg></span>
+          <h3>任意学科</h3>
+          <p>不限语文、数学、英语：科学、物理、化学、生物、历史、地理、道德与法治等学科，都可以定制。</p>
+        </article>
+        <article class="scope-card reveal" data-delay="2">
+          <span class="scope-icon"><svg class="icon"><use href="#i-list"></use></svg></span>
+          <h3>某一单元 / 章节</h3>
+          <p>只练某一册的某一单元、某一章节，或把老师划的期末复习范围整册串起来，题目不超出这个范围。</p>
+        </article>
+        <article class="scope-card reveal">
+          <span class="scope-icon"><svg class="icon"><use href="#i-shield"></use></svg></span>
+          <h3>某个知识点</h3>
+          <p>孩子总错的「分数通分」「因式分解」「时态」这类单点，可以集中出一组题，反复练到会为止。</p>
+        </article>
+        <article class="scope-card reveal" data-delay="1">
+          <span class="scope-icon"><svg class="icon"><use href="#i-check"></use></svg></span>
+          <h3>题型、题量与解析</h3>
+          <p>题量多少、要不要文字解析、句子长短都能指定；成品按 App 的四选一选择题格式整理，方便遥控器作答。</p>
+        </article>
+        <article class="scope-card reveal" data-delay="2">
+          <span class="scope-icon"><svg class="icon"><use href="#i-pinyin"></use></svg></span>
+          <h3>完全按你的需求</h3>
+          <p>课本页码、老师划的重点、错题照片、家长自己编的题、课外拓展内容，都能整理成一套专属题库。</p>
+        </article>
+      </div>
+      <div class="callout info reveal">
+        <svg class="icon"><use href="#i-info"></use></svg>
+        <div><strong>定制流程</strong><p>把范围和需求发给作者 → 确认学科 / 单元 / 知识点与题量 → 出题校对 → 拿到专属下载码 → 在 App 里「下载并导入」。<b>没有固定菜单，什么题目都可以定制</b>；唯一的技术要求是整理成四个选项的选择题，这样才能在电视上用遥控器作答。想定制题库，加作者微信 <b>qiannianyihou8</b>（二维码见下方「想要一套专属题」卡片）。</p></div>
+      </div>
+      <div class="scope-note reveal"><svg class="icon"><use href="#i-info"></use></svg><span>定制语数英之外的学科时，导入后请在「家长设置 → 学科配比」把<b>「其它」</b>从默认的 0 调大，题目才会被抽到；「知识点范围」里也有「其它」，可按学科或知识点大类专项练习。</span></div>
+    </div>
+  </section>
+
+  <!-- 下载码怎么用 + 定制 -->
+  <section class="section" id="howto">
+    <div class="container">
+      <div class="section-head center reveal">
+        <div class="kicker">HOW TO USE / 下载码使用</div>
+        <h2 class="h2">四个步骤，<span class="grad">把题装进电视</span></h2>
+        <p class="sub">全程在电视上用遥控器完成；下载需要联网，出题与答题始终在本地。</p>
+      </div>
+      <div class="howto-grid">
+        <div class="card howto-card reveal">
+          <div class="method-head"><h3>下载并导入</h3><span>约 1 分钟</span></div>
+          <div class="steps">
+            <div class="step-row"><div class="step-dot">1</div><div><h3>打开题库信息</h3><p>在 App 首页进「家长设置」→ 最上方「题库信息」卡片，找到右侧「新增题库」区域（左边就是官网二维码，用手机扫一扫可以打开本页）。</p></div></div>
+            <div class="step-row"><div class="step-dot">2</div><div><h3>填入下载码</h3><p>在上面的表格里点「复制」，或直接用遥控器输入短码，例如 3 年级上册是 <code>s3a</code>。下载码只含字母、数字，长度 1–64 位。</p></div></div>
+            <div class="step-row"><div class="step-dot">3</div><div><h3>点「下载并导入」</h3><p>App 自动按下载码拉取对应的题库文件并写入本机题库，完成后显示成功导入 / 跳过题数。</p></div></div>
+            <div class="step-row"><div class="step-dot">4</div><div><h3>调整出题范围</h3><p>回到「出题范围」选择对应教材版本、年级、学期即可；定制的是语数英之外的学科时，再到「学科配比 → 其它」把默认的 0 调大才会抽到。重复题会自动跳过，同一码重复导入不会让题目变多。</p></div></div>
+          </div>
+          <div class="callout warn">
+            <svg class="icon"><use href="#i-info"></use></svg>
+            <div><strong>下载失败先查这两点</strong><p>① 电视要能上网，且能访问 xsd.qx47.com；② 下载码要和表格里完全一致（区分大小写）。下载码对应的题库文件由官网提供，定制题库的码在作者交付后才生效。</p></div>
+          </div>
+        </div>
+
+        <div class="card custom-card reveal" data-delay="1">
+          <span class="custom-icon"><svg class="icon"><use href="#i-sliders"></use></svg></span>
+          <h3>想要一套专属题？</h3>
+          <p class="custom-lead">不只在四个难度里选：<b>什么题目都可以定制</b>。语数英之外的学科、某一册的某一单元、孩子总错的某个知识点、老师划的复习范围，都可以按你的需求出题，没有固定菜单。联系作者定制，完成后给一个专属下载码，按左边四步导入即可。</p>
+          <div class="custom-block">
+            <div class="custom-label">定制时请说明（越具体越好）</div>
+            <ul class="custom-list">
+              <li><svg class="icon"><use href="#i-check"></use></svg> 教材版本、年级、学期</li>
+              <li><svg class="icon"><use href="#i-check"></use></svg> 学科：语数英，或其它任意学科</li>
+              <li><svg class="icon"><use href="#i-check"></use></svg> 范围：整册 / 某一单元 / 章节 / 某个知识点</li>
+              <li><svg class="icon"><use href="#i-check"></use></svg> 难度：四级任选，或直接描述孩子水平</li>
+              <li><svg class="icon"><use href="#i-check"></use></svg> 题量、是否要文字解析，以及其它任何要求</li>
+            </ul>
+          </div>
+          <button class="btn btn-outline custom-copy" id="copyCustom" type="button" data-copy="【学时兑题库定制需求】&#10;教材版本 / 年级 / 学期：例如 人教版 5 年级下册&#10;学科：数学 / 语文 / 英语 / 其它（请写学科名）&#10;定制范围：整册 / 第几单元 / 章节 / 某个知识点（请写具体）&#10;目标难度：简单 / 中等 / 偏难 / 难 / 按孩子水平描述&#10;题量：例如 300 题&#10;是否需要文字解析：是 / 否&#10;其它要求 / 补充说明：">
+            <svg class="icon"><use href="#i-copy"></use></svg><span>复制定制需求模板</span>
+          </button>
+          <div class="custom-contact">
+            <div class="cc-qr"><img src="assets/img/wx-qr.jpg" alt="作者微信二维码，扫码添加微信号 qiannianyihou8"></div>
+            <div class="cc-info">
+              <div class="cc-label">定制题库 · 联系作者</div>
+              <div class="cc-wechat"><svg class="icon"><use href="#i-qr"></use></svg> 微信号 <b>qiannianyihou8</b></div>
+              <button class="btn btn-outline btn-sm cc-copy" type="button" data-copy="qiannianyihou8"><svg class="icon"><use href="#i-copy"></use></svg><span>复制微信号</span></button>
+              <p class="cc-tip">添加时备注「学时兑题库定制」+ 孩子年级 / 学科，作者会和你确认范围、难度与题量后出题，完成后交付一个专属下载码。</p>
+            </div>
+          </div>
+          <div class="custom-foot">复制后发给作者，沟通好会拿到一个专属下载码；定制题库同样走「下载并导入」，不需要重新安装 App。现成题库之外没有的限制，都可以直接写进「其它要求」。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 设备适配 -->
+  <section class="section section-alt" id="devices">
+    <div class="container">
+      <div class="section-head center reveal">
+        <div class="kicker">DEVICES / 装在哪儿</div>
+        <h2 class="h2">一块屏幕，<span class="grad">很多种装法</span></h2>
+        <p class="sub">学时兑是 Android 应用，适配小米、TCL、创维、索尼等主流智能电视，也能装在电视盒子与投影仪上，用原装遥控器就能答题。</p>
+      </div>
+      <div class="device-grid">
+        <article class="device-card reveal"><svg class="icon"><use href="#i-tv"></use></svg><h3>智能电视</h3><p>小米、TCL、创维、索尼等主流品牌，装好后在电视桌面直接打开，遥控器方向键与数字键 1–4 都能作答。</p><div class="brand-list"><span>小米</span><span>TCL</span><span>创维</span><span>索尼</span></div></article>
+        <article class="device-card reveal" data-delay="1"><svg class="icon"><use href="#i-wifi"></use></svg><h3>电视盒子</h3><p>老电视接上安卓盒子一样能用。已在小米盒子 4（Android 6.0.1，1920×1080）完整跑通答题流程。</p><div class="brand-list"><span>小米盒子</span><span>安卓盒子</span></div></article>
+        <article class="device-card reveal" data-delay="2"><svg class="icon"><use href="#i-book"></use></svg><h3>投影仪</h3><p>带安卓系统的家用投影仪可以直接安装；大字界面与宽松的选项排布，投射到大画面上也看得清。</p><div class="brand-list"><span>安卓投影</span><span>大屏适配</span></div></article>
+        <article class="device-card reveal" data-delay="2"><svg class="icon"><use href="#i-shield"></use></svg><h3>安卓手机 / 平板</h3><p>也能安装调试。系统要求 Android 5.0 及以上，首次运行需允许「显示悬浮窗」权限，家长设置由密码保护。</p><div class="brand-list"><span>Android 5.0+</span><span>触屏可用</span></div></article>
+      </div>
+      <div class="device-note reveal"><svg class="icon"><use href="#i-info"></use></svg><span>不同品牌菜单名称略有差别，找「未知来源安装」「文件管理器」「远程安装」即可；完整步骤见 <a class="inline-link" href="index.html#install">安装说明</a>。题库与出题都在设备本地，只有下载题库、手机扫码管理和在线收款码需要联网。</span></div>
+    </div>
+  </section>
+
+  <!-- 底部引导 -->
+  <section class="section download-section" id="getapp">
+    <div class="container">
+      <div class="download-card reveal">
+        <div class="dl-glow" aria-hidden="true"></div>
+        <div class="dl-left">
+          <img class="dl-logo" src="assets/img/logo.png" alt="学时兑图标">
+          <div>
+            <div class="dl-kicker">内置简单等级 · 其余按需定制</div>
+            <h2>学时兑 <span class="dl-ver">v2.02</span></h2>
+            <p class="dl-sub">看电视 · 答个题 · 有约定</p>
+            <div class="dl-meta"><span>更新于 2026-11-15</span><span>2,713,119 B</span><span>com.xsdanser.tv</span><span>Android 5.0+</span><span>电视 / 盒子 / 投影仪</span></div>
+          </div>
+        </div>
+        <div class="dl-right">
+          <a class="btn btn-primary btn-lg" href="download/XsdAnser-v30-ui.apk" download><svg class="icon"><use href="#i-download"></use></svg> 下载 APK</a>
+          <a class="btn btn-outline btn-lg" href="index.html#install">安装说明</a>
+          <div class="dl-sign">签名 SHA-256 <code>f1224e80…58c693d</code></div>
+          <a class="dl-official" href="index.html#top">返回官网首页 <svg class="icon"><use href="#i-arrow"></use></svg></a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <a class="brand" href="index.html#top"><img src="assets/img/logo.png" alt="学时兑图标"><span class="brand-text">学时兑<small>XSDANSER</small></span></a>
+      <p>为一块更讲道理的屏幕而做。</p>
+    </div>
+    <nav class="footer-links" aria-label="页脚导航">
+      <a href="index.html#intro">产品介绍</a><a href="index.html#features">功能亮点</a><a href="bank.html">题库下载</a><a href="index.html#screens">界面一览</a><a href="index.html#guard">守护 App</a><a href="index.html#install">安装说明</a><a href="index.html#adb">ADB 安装</a><a href="index.html#faq">常见问题</a><a href="index.html#download">下载 App</a>
+    </nav>
+  </div>
+  <div class="container footer-bottom">
+    <span>© <span id="year">2026</span> 学时兑 · XsdAnser</span>
+    <span>适配小米 / TCL / 创维 / 索尼等电视 · 盒子 · 投影仪 ｜ 题库与出题在设备本地</span>
+  </div>
+</footer>
+
+<a class="to-top" id="toTop" href="#top" aria-label="回到顶部"><svg class="icon"><use href="#i-arrow"></use></svg></a>
+<script src="assets/js/main.js"></script>
+<script>
+/* 题库目录：按小学 / 初中快速筛选 */
+(function () {
+  var btns = document.querySelectorAll('[data-filter]');
+  var rows = document.querySelectorAll('#bankTable tbody tr');
+  var label = document.getElementById('bankCount');
+  Array.prototype.forEach.call(btns, function (btn) {
+    btn.addEventListener('click', function () {
+      var f = btn.getAttribute('data-filter');
+      Array.prototype.forEach.call(btns, function (b) {
+        b.classList.toggle('active', b === btn);
+      });
+      var n = 0;
+      Array.prototype.forEach.call(rows, function (row) {
+        var show = f === 'all' || row.getAttribute('data-stage') === f;
+        row.style.display = show ? '' : 'none';
+        if (show) n++;
+      });
+      if (label) label.textContent = '当前显示 ' + n + ' 套';
+    });
+  });
+})();
+</script>
+</body>
+</html>

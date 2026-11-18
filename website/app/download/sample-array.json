@@ -1,0 +1,32 @@
+[
+  {
+    "edition": "人教版",
+    "grade_label": "3年级",
+    "subject": "数学",
+    "term": "",
+    "chapter": "下载码示例",
+    "topic": "示例·表内乘法",
+    "text": "【数组格式示例】6 × 7 = ( )",
+    "opt_a": "36",
+    "opt_b": "42",
+    "opt_c": "48",
+    "opt_d": "40",
+    "answer_index": 1,
+    "explain": "六七四十二，所以 6 × 7 = 42。"
+  },
+  {
+    "edition": "人教版",
+    "grade_label": "4年级",
+    "subject": "数学",
+    "term": "全学年",
+    "chapter": "下载码示例",
+    "topic": "示例·单位换算",
+    "text": "【数组格式示例】3 千米 = ( ) 米",
+    "opt_a": "30",
+    "opt_b": "300",
+    "opt_c": "3000",
+    "opt_d": "30000",
+    "answer_index": 2,
+    "explain": "1 千米 = 1000 米，所以 3 千米 = 3000 米。"
+  }
+]

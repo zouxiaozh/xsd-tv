@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#070c16">
+<meta name="description" content="学时兑适配小米、TCL、创维、索尼等主流智能电视，也能装在电视盒子与投影仪上：到点自动出题、暂停画面，答对才能继续观看。内置人教版 1-9 年级 10800 题，支持下载码扩充题库、任意学科与单元知识点按需定制、中文注音、错题库、家长密码与手机扫码管理；另有手机端「学时兑守护」，用 Wi-Fi ADB 自动安装、开权限与长期看护。">
+<title>学时兑 · 看电视，答个题，有约定</title>
+<link rel="icon" type="image/png" href="assets/img/logo.png">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div style="background:#0d9488;color:#fff;text-align:center;padding:10px 16px;font:600 15px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">✅ 学时兑永久免费使用 · 无广告 · 无内购 · 无需注册</div>
+
+
+<!-- 图标精灵 -->
+<svg class="sprite" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H19v16H6.5A2.5 2.5 0 0 0 4 21.5z"/><path d="M4 18.5A2.5 2.5 0 0 1 6.5 16H19"/><path d="M9 7.5h6M9 11h4"/></symbol>
+  <symbol id="i-pinyin" viewBox="0 0 24 24"><path d="M3 18l4.2-11L11.4 18M4.6 14h5.1"/><path d="M16 8v9M16 8.4c1.6-.9 3.4-.5 4 .7.5 1.1.2 2.5-.8 3.4-1.1 1-2.6 1.3-3.2 2.4M18.5 4.2l1 1.6"/></symbol>
+  <symbol id="i-speaker" viewBox="0 0 24 24"><path d="M4 9.5h3.2L12 5.5v13l-4.8-4H4z"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><rect x="4" y="3.5" width="16" height="17" rx="2.5"/><path d="M8 8.5h8M8 12.5h8M8 16.5h5"/><path d="m5.5 8 .6.6 1-1.2" stroke-width="1.4"/></symbol>
+  <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2.2"/><circle cx="9" cy="17" r="2.2"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4.5" y="10" width="15" height="10.5" rx="2.5"/><path d="M8 10V7.5a4 4 0 0 1 8 0V10M12 14v2.5"/></symbol>
+  <symbol id="i-qr" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="7" rx="1"/><rect x="13.5" y="3.5" width="7" height="7" rx="1"/><rect x="3.5" y="13.5" width="7" height="7" rx="1"/><path d="M14 14h2.5v2.5H14zM19 14h1.5M14 19h2M19 18v3"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7.5 3v5.5c0 4.6-3 8-7.5 9.5-4.5-1.5-7.5-4.9-7.5-9.5V6z"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3.5v11m0 0 4-4m-4 4-4-4"/><path d="M4.5 17v2A1.5 1.5 0 0 0 6 20.5h12a1.5 1.5 0 0 0 1.5-1.5v-2"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4.5 12h14m0 0-5-5m5 5-5 5"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7"/></symbol>
+  <symbol id="i-tv" viewBox="0 0 24 24"><rect x="2.5" y="4" width="19" height="13.5" rx="2"/><path d="M8 21h8M12 17.5V21"/></symbol>
+  <symbol id="i-wifi" viewBox="0 0 24 24"><path d="M3.5 9a13 13 0 0 1 17 0M6.5 12.5a8.5 8.5 0 0 1 11 0M9.5 16a4 4 0 0 1 5 0"/><circle cx="12" cy="19" r="1" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8.5" y="8.5" width="11" height="11" rx="2"/><path d="M15.5 5.5v-1a1 1 0 0 0-1-1h-9a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h1"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.8v.4"/></symbol>
+</svg>
+
+<div class="scroll-progress" id="progress"></div>
+<div class="aurora" aria-hidden="true">
+  <span class="blob blob-a"></span><span class="blob blob-b"></span><span class="blob blob-c"></span>
+  <span class="grid-mask"></span>
+</div>
+
+<!-- 导航 -->
+<header class="nav" id="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="#top" aria-label="学时兑首页">
+      <img src="assets/img/logo.png" alt="学时兑图标">
+      <span class="brand-text">学时兑<small>XSDANSER</small></span>
+    </a>
+    <nav class="nav-links" id="navLinks" aria-label="主导航">
+      <a href="#intro">产品介绍</a>
+      <a href="#how">工作原理</a>
+      <a href="#features">功能亮点</a>
+      <a href="bank.html">题库下载</a>
+      <a href="#screens">界面一览</a>
+      <a href="#guard">守护 App</a>
+      <a href="#install">安装说明</a>
+      <a href="#adb">ADB 安装</a>
+      <a href="#faq">常见问题</a>
+      <a class="nav-menu-download" href="#download">下载 App</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeToggle" aria-label="切换深浅主题" title="切换深浅主题">
+        <svg class="icon"><use href="#i-moon"></use></svg>
+      </button>
+      <a class="btn btn-primary btn-sm nav-download" href="#download">下载 App</a>
+      <button class="icon-btn menu-btn" id="menuBtn" aria-label="展开菜单" aria-expanded="false">
+        <svg class="icon"><use href="#i-menu"></use></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy reveal">
+        <div class="eyebrow"><span class="pulse"></span> 版本 v2.03 · 电视 / 盒子 / 投影仪都能装</div>
+        <h1>看电视，<br><span class="grad">答个题</span>，<br>有约定。</h1>
+        <p class="lead">把「再看一会儿」变成一次小小的认真。到点自动出题、暂停画面，答对才能继续观看；家长用手机扫个码，就能管好这块屏幕。</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary btn-lg" href="download/XsdAnser-v30-ui.apk" download>
+            <svg class="icon"><use href="#i-download"></use></svg>
+            下载 v2.03 <span class="btn-sub">约 2.6 MB</span>
+          </a>
+          <a class="btn btn-ghost btn-lg" href="#install">安装说明 <svg class="icon"><use href="#i-arrow"></use></svg></a>
+        </div>
+        <div class="device-line"><svg class="icon"><use href="#i-tv"></use></svg><span>适配小米、TCL、创维、索尼等主流智能电视，也能装在电视盒子与投影仪上 · Android 5.0+</span></div>
+        <div class="device-line guard-line"><svg class="icon"><use href="#i-shield"></use></svg><span>不想用电脑？手机装「<a class="inline-link" href="#guard">学时兑守护</a>」就能连 ADB、自动安装并长期看护</span></div>
+        <ul class="hero-badges">
+          <li><svg class="icon"><use href="#i-check"></use></svg> 无需注册</li>
+          <li><svg class="icon"><use href="#i-check"></use></svg> 题库可扩充</li>
+          <li><svg class="icon"><use href="#i-check"></use></svg> 家长密码</li>
+          <li><svg class="icon"><use href="#i-check"></use></svg> 局域网管理</li>
+        </ul>
+      </div>
+
+      <div class="hero-visual reveal" data-delay="1">
+        <div class="tv-halo"></div>
+        <div class="tv-frame">
+          <div class="tv-bar"><i></i><i></i><i></i><span>学时兑 · 首页</span></div>
+          <div class="tv-screen"><img src="assets/img/screens/home.png" alt="学时兑首页：守护运行中、距下次出题实时倒数、五个快捷按钮"></div>
+        </div>
+        <div class="tv-foot"></div>
+        <div class="float-card float-reminder">
+          <span class="fc-dot"></span>
+          <div><strong>还有 10 分钟就要答题啦</strong><small>先准备一下 · 顶部温柔提醒</small></div>
+        </div>
+        <div class="float-card float-quiz">
+          <div class="fc-quiz-head">该答题啦 · 数学 · 人教版</div>
+          <div class="fc-quiz-q">2 + ( ) = 5。</div>
+          <div class="fc-quiz-foot">答对才能继续 · 方向键 / 数字键 1-4</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="stats reveal" id="stats">
+        <div class="stat"><div class="stat-num"><span data-count="10800">10,800</span><em>题</em></div><div class="stat-label">内置精选题库</div></div>
+        <div class="stat"><div class="stat-num"><span data-count="9">9</span><em>个年级</em></div><div class="stat-label">小学到初中全覆盖</div></div>
+        <div class="stat"><div class="stat-num"><span data-count="216">216</span><em>知识点</em></div><div class="stat-label">按年级 / 学期 / 学科筛选</div></div>
+        <div class="stat"><div class="stat-num"><span data-count="16">16</span><em>大类</em></div><div class="stat-label">语文 · 数学 · 英语 · 科学…</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 产品介绍 -->
+  <section class="section" id="intro">
+    <div class="container intro-grid">
+      <div class="reveal">
+        <div class="kicker">ABOUT / 关于学时兑</div>
+        <h2 class="h2">不是抢走电视，<br>是给电视加一个<span class="grad">约定</span>。</h2>
+        <p class="body">孩子看电视，最难的不是「不让看」，而是「说好了看多久」。学时兑把这个约定交给程序执行：时间一到，画面上出现一道和课本同步的小题；答对了，继续看；答错了，安静地再来一次。</p>
+        <p class="body">它适配小米、TCL、创维、索尼等主流智能电视，也能装在电视盒子、投影仪上，不占用手机，也不需要孩子的账号。所有参数由家长设定，题库随安装包一起放进设备，客厅里断网也能照常出题。</p>
+        <div class="intro-points">
+          <div class="intro-point"><span class="pt-icon"><svg class="icon"><use href="#i-shield"></use></svg></span><div><strong>家长说了算</strong><small>4–8 位家长密码守护设置页</small></div></div>
+          <div class="intro-point"><span class="pt-icon"><svg class="icon"><use href="#i-book"></use></svg></span><div><strong>跟着课本走</strong><small>人教版 1–9 年级，按学期挑题</small></div></div>
+          <div class="intro-point"><span class="pt-icon"><svg class="icon"><use href="#i-download"></use></svg></span><div><strong>题库可扩充</strong><small>官网下载码一键导入新题</small></div></div>
+          <div class="intro-point"><span class="pt-icon"><svg class="icon"><use href="#i-wifi"></use></svg></span><div><strong>断网也能出题</strong><small>出题本地完成，下载与管理按需联网</small></div></div>
+        </div>
+      </div>
+      <div class="banner-wrap reveal" data-delay="1">
+        <div class="banner-card">
+          <img src="assets/img/banner.png" alt="学时兑 Android TV 桌面横幅：电视学习 · 学时可兑">
+        </div>
+        <div class="banner-chip"><span class="pulse"></span> 已适配 Android TV 桌面横幅</div>
+        <div class="banner-note"><svg class="icon"><use href="#i-info"></use></svg> 装好后在电视 / 盒子 / 投影仪桌面就能看到「学时兑」，用原装遥控器直接打开。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 工作原理 -->
+  <section class="section section-alt" id="how">
+    <div class="container">
+      <div class="section-head center reveal">
+        <div class="kicker">HOW IT WORKS / 工作原理</div>
+        <h2 class="h2">看 → 答 → 兑，一个说得清的闭环</h2>
+        <p class="sub">默认每 10 分钟一轮、每轮 1 题；家长可随时调整频率、题数与时长。</p>
+      </div>
+      <div class="flow">
+        <article class="step reveal">
+          <div class="step-no">01</div>
+          <div class="step-icon"><svg class="icon"><use href="#i-tv"></use></svg></div>
+          <h3>安心看</h3>
+          <p>守护在后台计时，临近出题先在屏幕顶部轻轻提醒一句「还有 10 分钟就要答题啦 · 先准备一下」，不打断正在看的内容。</p>
+          <div class="step-foot">提醒可感知 · 不突兀</div>
+        </article>
+        <article class="step reveal" data-delay="1">
+          <div class="step-no">02</div>
+          <div class="step-icon"><svg class="icon"><use href="#i-clock"></use></svg></div>
+          <h3>到点答</h3>
+          <p>时间一到，全屏答题浮层覆盖画面，视频暂停。用遥控器方向键或数字键 1–4 作答：第一次答错弹出解析卡、选项重排再想一想；第二次再答错就记入错题库，不弹卡、立即自动换一题。两种守护方案一致。</p>
+          <div class="step-foot">暂停画面 · 答对才能继续</div>
+        </article>
+        <article class="step reveal" data-delay="2">
+          <div class="step-no">03</div>
+          <div class="step-icon"><svg class="icon"><use href="#i-check"></use></svg></div>
+          <h3>兑时长</h3>
+          <p>「自主可控」方案里，每答对 1 题可获得 1 分钟观看时长；「严谨守护」方案按固定频率出题。两种方案、起始时长、奖励时长都由家长决定。</p>
+          <div class="step-foot">认真一小步 · 换回一点时间</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 功能亮点 -->
+  <section class="section" id="features">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="kicker">FEATURES / 功能亮点</div>
+        <h2 class="h2">把该有的都想到，<span class="grad">把复杂的都藏好</span></h2>
+        <p class="sub">从低年级认字到家长远程管理，细节都在设置里，界面仍然一眼看懂。</p>
+      </div>
+      <div class="feature-grid">
+        <article class="card feature reveal"><span class="f-icon tone-teal"><svg class="icon"><use href="#i-clock"></use></svg></span><h3>到点自动出题</h3><p>出题频率、每轮题数、答错停留时长都可调；首页实时显示「守护运行中」与距下次出题的秒数。</p><span class="f-tag">默认 10 分钟 / 1 题</span></article>
+        <article class="card feature reveal" data-delay="1"><span class="f-icon tone-blue"><svg class="icon"><use href="#i-book"></use></svg></span><h3>人教版同步题库</h3><p>10800 道选择题覆盖 9 个年级、216 个知识点、16 大类，可按年级、学期、学科与知识点范围挑题，随包内置、出题不联网。</p><span class="f-tag">简单等级 · 已内置</span></article>
+        <article class="card feature reveal" data-delay="2"><span class="f-icon tone-violet"><svg class="icon"><use href="#i-pinyin"></use></svg></span><h3>中文注音</h3><p>题干与选项的每个汉字上方标出带声调拼音，低年级孩子不识字也能读题；家长设置里一键开关，默认关闭。</p><span class="f-tag">含多音词校正</span></article>
+        <article class="card feature reveal"><span class="f-icon tone-amber"><svg class="icon"><use href="#i-download"></use></svg></span><h3>下载码扩充题库</h3><p>家长设置 → 题库信息，输入官网下载码即可把新题导入本机；也可手机扫二维码打开题库下载页。除四级难度外，任意学科、某一单元或某个知识点都能联系作者按需定制，什么题目都能做。</p><span class="f-tag">18 套现成 · 其余可定制</span></article>
+        <article class="card feature reveal" data-delay="1"><span class="f-icon tone-rose"><svg class="icon"><use href="#i-list"></use></svg></span><h3>错题库与解析</h3><p>第一次答错弹出解析卡，四个选项重新排列再答一遍；同一题第二次再答错就不再弹卡，直接记入错题库并立即自动换题。严谨守护与自主可控两种方案都按这个规则执行。</p><span class="f-tag">答错 2 次 · 入库换题</span></article>
+        <article class="card feature reveal" data-delay="2"><span class="f-icon tone-teal"><svg class="icon"><use href="#i-sliders"></use></svg></span><h3>两套守护方案</h3><p>「严谨守护」按固定节奏出题，「自主可控」用答题兑换观看时长；切换方案后参数分区随之生效。</p><span class="f-tag">严谨守护 / 自主可控</span></article>
+        <article class="card feature reveal"><span class="f-icon tone-blue"><svg class="icon"><use href="#i-lock"></use></svg></span><h3>家长密码</h3><p>首次进入家长设置时设定 4–8 位数字密码，之后所有参数、题库范围、扫码页都受它保护。</p><span class="f-tag">PIN 保护</span></article>
+        <article class="card feature reveal" data-delay="1"><span class="f-icon tone-violet"><svg class="icon"><use href="#i-qr"></use></svg></span><h3>手机扫码管理</h3><p>电视上打开扫码页，手机同 Wi-Fi 扫一下：改参数、切年级学期、开注音、立即出题、锁屏解锁、暂停恢复、重置观看时间。</p><span class="f-tag">一次性随机令牌</span></article>
+        <article class="card feature reveal" data-delay="2"><span class="f-icon tone-amber"><svg class="icon"><use href="#i-shield"></use></svg></span><h3>本地优先 · 不打扰</h3><p>不注册账号、不上传作答记录；出题与题库都在设备本地完成，只有下载新题库、手机扫码管理与在线收款码需要网络。</p><span class="f-tag">数据留在家里</span></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 题库下载 -->
+  <section class="section" id="bank">
+    <div class="container bank-teaser">
+      <div class="reveal">
+        <div class="kicker">QUESTION BANK / 题库下载</div>
+        <h2 class="h2">题目不够用？<br><span class="grad">下载码接着装</span></h2>
+        <p class="body">App 已内置人教版 1–9 年级上下册 10800 道「简单」等级题，用下载码可同步到家里第二台电视、盒子或投影仪。没有现成下载码的题都能联系作者定制：不只是四个难度等级，任意学科、某一册的某一单元、孩子总错的某个知识点，甚至任何你想要的题目，都可以按需求出题，完成后凭专属下载码导入。</p>
+        <ul class="check-list">
+          <li><svg class="icon"><use href="#i-check"></use></svg> 教材版本 / 年级 / 学期 / 学科 / 等级 / 下载码，一表看清</li>
+          <li><svg class="icon"><use href="#i-check"></use></svg> 语数英之外的学科也能定制，单元、知识点都能指定</li>
+          <li><svg class="icon"><use href="#i-check"></use></svg> 家长设置 → 题库信息 → 输入下载码 → 下载并导入</li>
+        </ul>
+        <a class="btn btn-primary" href="bank.html">查看题库下载目录 <svg class="icon"><use href="#i-arrow"></use></svg></a>
+        <div class="bank-contact-note"><svg class="icon"><use href="#i-qr"></use></svg><span>没有现成下载码的题也能做：可<b>按需定制</b>任意学科 / 单元 / 知识点，联系作者微信 <b>qiannianyihou8</b>（<a href="bank.html#custom">看定制范围与二维码</a>）。</span></div>
+      </div>
+      <div class="bank-teaser-cards reveal" data-delay="1">
+        <article class="level-card lv-easy mini"><div class="lv-name">简单</div><span class="lv-state lv-state-ready"><svg class="icon"><use href="#i-check"></use></svg> 已有题库</span><p>人教版 1–9 年级上下册，10800 题，随 App 内置。</p></article>
+        <article class="level-card lv-mid mini"><div class="lv-name">中等</div><span class="lv-state lv-state-custom"><svg class="icon"><use href="#i-lock"></use></svg> 需定制</span><p>课内变式题，定制后提供专属下载码。</p></article>
+        <article class="level-card lv-hard mini"><div class="lv-name">偏难</div><span class="lv-state lv-state-custom"><svg class="icon"><use href="#i-lock"></use></svg> 需定制</span><p>综合应用与多步推理，定制后提供下载码。</p></article>
+        <article class="level-card lv-expert mini"><div class="lv-name">难</div><span class="lv-state lv-state-custom"><svg class="icon"><use href="#i-lock"></use></svg> 需定制</span><p>拔高与竞赛风格，定制后提供下载码。</p></article>
+        <div class="bank-teaser-note reveal"><svg class="icon"><use href="#i-info"></use></svg><span><b>定制不只是难度：</b>任意学科（不限语数英）、某一单元 / 章节、某个知识点、老师划的复习范围，都能按孩子的需求单独出题，什么题目都可以定制。<a class="inline-link" href="bank.html#custom">看定制范围</a></span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 界面一览 -->
+  <section class="section section-alt" id="screens">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="kicker">SCREENS / 界面一览</div>
+        <h2 class="h2">电视上看得清，<span class="grad">遥控器按得准</span></h2>
+        <p class="sub">下面都是真实设备截图，不是设计稿。点标签切换查看。</p>
+      </div>
+      <div class="showcase reveal">
+        <div class="device">
+          <div class="device-bar"><i></i><i></i><i></i><span id="screenBar">首页</span></div>
+          <div class="device-screen">
+            <img id="screenImg" src="assets/img/screens/home.png" alt="学时兑首页界面截图">
+          </div>
+          <div class="device-glow"></div>
+        </div>
+        <div class="showcase-info">
+          <div class="screen-counter"><span id="screenNum">01</span> / 06</div>
+          <h3 id="screenTitle">首页 · 一眼看清约定</h3>
+          <p id="screenDesc">守护状态、出题频率、每轮题数、答错停留、距下次出题的秒数都摆在首页；底部五个大按钮用遥控器左右键就能选中。</p>
+          <div class="screen-tags" id="screenTags"><span>守护运行中</span><span>距下次出题实时倒数</span><span>当前方案 · 严谨守护</span></div>
+          <div class="screen-tabs" role="tablist" aria-label="界面截图切换">
+            <button class="tab active" data-screen="home" role="tab" aria-selected="true">首页</button>
+            <button class="tab" data-screen="quiz" role="tab" aria-selected="false">注音答题</button>
+            <button class="tab" data-screen="tv" role="tab" aria-selected="false">盒子实机</button>
+            <button class="tab" data-screen="settings" role="tab" aria-selected="false">家长设置</button>
+            <button class="tab" data-screen="qr" role="tab" aria-selected="false">扫码管理</button>
+            <button class="tab" data-screen="lock" role="tab" aria-selected="false">远程锁屏</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 扫码管理 -->
+  <section class="section" id="manage">
+    <div class="container manage-grid">
+      <div class="reveal">
+        <div class="kicker">PARENT CONTROL / 家长管理</div>
+        <h2 class="h2">不用抢遥控器，<br><span class="grad">手机扫一下就行</span></h2>
+        <p class="body">家长设置里打开「扫码管理」，电视会显示一个二维码和局域网地址。手机连同一个 Wi-Fi 扫码，即可打开控制台：参数、年级学期、注音开关、立即出题、锁屏解锁、暂停或恢复播放、重置观看时间，都能在手机上完成。</p>
+        <ul class="check-list">
+          <li><svg class="icon"><use href="#i-check"></use></svg> 管理地址带一次性随机令牌，每次打开扫码页都会重新生成</li>
+          <li><svg class="icon"><use href="#i-check"></use></svg> 只在家里局域网提供，退出应用即失效，不用注册、不连云端</li>
+          <li><svg class="icon"><use href="#i-check"></use></svg> 二维码含有管理权限，请不要转发给他人</li>
+        </ul>
+      </div>
+      <div class="manage-visual reveal" data-delay="1">
+        <div class="manage-img"><img src="assets/img/screens/qr-manage.png" alt="学时兑扫码管理页面：二维码与局域网管理地址"></div>
+        <div class="manage-badge"><svg class="icon"><use href="#i-wifi"></use></svg> 手机与电视需在同一 Wi-Fi</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 手机守护 App -->
+  <section class="section guard-section" id="guard">
+    <div class="container">
+      <div class="section-head center reveal">
+        <div class="kicker">PHONE GUARD / 手机守护 App</div>
+        <h2 class="h2">不用电脑，<span class="grad">手机也能装好并看护</span></h2>
+        <p class="sub">「学时兑守护」是配套的手机端小工具（v2.14.3，约 113 KB）。通过家里 Wi-Fi 的 ADB 连上电视 / 盒子，自动下载安装学时兑、补齐权限，并定时检查守护是否还在。</p>
+      </div>
+
+      <div class="guard-grid">
+        <div class="reveal">
+          <ul class="check-list guard-checks">
+            <li><svg class="icon"><use href="#i-check"></use></svg><span>装在安卓手机 / 平板上（也能装在备用盒子），<b>Android 5.0+</b>、无需注册、无需 Root；填好设备列表 <code>名称|IP:端口|开关</code>、检测间隔与学时兑下载网址即可。</span></li>
+            <li><svg class="icon"><use href="#i-check"></use></svg><span><b>点「连接 ADB」成功后</b>才解锁安装与守护；首次电视弹「允许 USB 调试吗」要勾选<b>「始终允许」</b>，App 会循环检测生效再继续。</span></li>
+            <li><svg class="icon"><use href="#i-check"></use></svg><span>「安装学时兑到电视」先从官网直链下载 APK，再经 ADB 推送安装；检测到电视已装会提示<b>「学时兑已安装 · 可跳过」</b>。</span></li>
+            <li><svg class="icon"><use href="#i-check"></use></svg><span>安装后与「启动守护」时自动补齐<b>悬浮窗 / 电池白名单 / 开机自启 / 防休眠</b>并逐项复核，不用再敲命令。</span></li>
+            <li><svg class="icon"><use href="#i-check"></use></svg><span>守护期间<b>每约 10 秒</b>检测一次连通与学时兑状态，掉了自动拉起；点「断开 ADB」会停守护、停检测、锁定操作且不再自动重连。</span></li>
+            <li><svg class="icon"><use href="#i-check"></use></svg><span>守护期间一直确认电视上的学时兑<b>还在不在</b>：被卸载、被电视管家清理掉时，会<b>自动下载安装包装回并唤醒</b>，装回后守护继续（装不回来时按 1/2/4/8 分钟冷却重试，不会反复刷电视）。</span></li>
+          </ul>
+          <div class="guard-cta">
+            <a class="btn btn-primary" href="download/XsdGuardPhone.apk" download><svg class="icon"><use href="#i-download"></use></svg> 下载守护 App v2.14.3</a>
+            <a class="btn btn-outline" href="#install">看安装说明 <svg class="icon"><use href="#i-arrow"></use></svg></a>
+          </div>
+          <div class="guard-meta"><span>116,014 B</span><span>com.xsdanser.guard</span><span>Android 5.0+</span><span>签名同主 App f1224e80…58c693d</span></div>
+        </div>
+        <div class="guard-visual reveal" data-delay="1">
+          <div class="guard-phone"><img src="assets/img/screens/guard.png" alt="学时兑守护 App 界面：ADB 已连接、设备列表与下载网址、连接 / 安装 / 启动守护三个按钮、运行日志"></div>
+          <div class="manage-badge guard-badge"><svg class="icon"><use href="#i-wifi"></use></svg> 手机与盒子需在同一 Wi-Fi</div>
+        </div>
+      </div>
+
+      <div class="flow guard-flow">
+        <article class="step reveal">
+          <div class="step-no">01</div>
+          <div class="step-icon"><svg class="icon"><use href="#i-wifi"></use></svg></div>
+          <h3>连接 ADB</h3>
+          <p>盒子上开启 USB 调试 / 网络 ADB 调试，App 里填好 IP:5555 后点「连接 ADB」；电视弹窗勾选「始终允许」，日志出现「ADB 连接成功」即解锁后续操作。</p>
+          <div class="step-foot">打开 App 不会自动连接</div>
+        </article>
+        <article class="step reveal" data-delay="1">
+          <div class="step-no">02</div>
+          <div class="step-icon"><svg class="icon"><use href="#i-download"></use></svg></div>
+          <h3>安装 + 开权限</h3>
+          <p>点「安装学时兑到电视」，App 下载官网 APK 后推送安装，并自动放行悬浮窗、加入电池白名单、开通自启与防休眠；电视已装学时兑可跳过这一步。</p>
+          <div class="step-foot">已装可跳过 · 升级再点安装</div>
+        </article>
+        <article class="step reveal" data-delay="2">
+          <div class="step-no">03</div>
+          <div class="step-icon"><svg class="icon"><use href="#i-shield"></use></svg></div>
+          <h3>启动守护</h3>
+          <p>点「启动守护」后每约 10 秒检测一次连通与判活：学时兑被系统杀掉会自动拉起，被卸载或被管家清掉会自动下载安装包装回并唤醒。点「断开 ADB」可彻底停止，让出盒子连接给电脑。</p>
+          <div class="step-foot">10 秒心跳 · 一键断开</div>
+        </article>
+      </div>
+
+      <div class="callout warn guard-callout">
+        <svg class="icon"><use href="#i-info"></use></svg>
+        <div><strong>多数盒子同一时间只允许一条 ADB 连接</strong><p>用守护 App 时，请先停掉电脑上的 <code>adb connect</code> / 守护脚本；反过来电脑要装包时，先在 App 里点「断开 ADB」。两边抢同一条连接会出现「连接超时 / ADB 未连通」。各品牌开启 ADB 调试的路径见 <a class="inline-link" href="#adb">ADB 安装板块</a>，逐项权限见 <a class="inline-link" href="#permissions">权限清单</a>。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 安装说明 -->
+  <section class="section section-alt" id="install">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="kicker">INSTALL / 安装说明</div>
+        <h2 class="h2">四步装上，<span class="grad">十分钟用起来</span></h2>
+        <p class="sub">适配小米、TCL、创维、索尼等主流智能电视，也能装在电视盒子、投影仪与安卓手机上；已在小米盒子 4（Android 6.0.1）实机跑通。</p>
+      </div>
+
+      <div class="env-bar reveal">
+        <div><svg class="icon"><use href="#i-tv"></use></svg><span><strong>Android 5.0+</strong><small>电视 / 盒子 / 投影仪 / 手机</small></span></div>
+        <div><svg class="icon"><use href="#i-wifi"></use></svg><span><strong>同一 Wi-Fi</strong><small>扫码管理时需要</small></span></div>
+        <div><svg class="icon"><use href="#i-download"></use></svg><span><strong>约 2.6 MB</strong><small>另含约 5 MB 内置题库</small></span></div>
+        <div><svg class="icon"><use href="#i-shield"></use></svg><span><strong>悬浮窗权限</strong><small>首次运行必须允许</small></span></div>
+      </div>
+
+      <div class="install-grid">
+        <div class="steps reveal">
+          <div class="step-row"><div class="step-dot">1</div><div><h3>下载安装包</h3><p>点页面上的「下载 v2.03」，得到 <code>XsdAnser-v30-ui.apk</code>（2,717,245 字节）。这是自签名应用，浏览器提示「未知来源」时选择保留即可。</p></div></div>
+          <div class="step-row"><div class="step-dot">2</div><div><h3>装到电视 / 盒子 / 投影仪</h3><p>用右边任意一种方式把 APK 装进设备：U 盘最省事，手机投送不用插线，ADB 适合会命令行的人。也可以装手机端「<a class="inline-link" href="#guard">学时兑守护</a>」，用 Wi-Fi ADB 自动下载、安装并开好权限（右侧第 4 种方式）。小米、TCL、创维、索尼等品牌的菜单名称略有差别，找「未知来源安装」「远程安装」即可。</p></div></div>
+          <div class="step-row"><div class="step-dot">3</div><div><h3>首次启动三件事</h3><p>① 允许「显示悬浮窗」；② 等几秒让约 5 MB 题库在后台复制完成；③ 进家长设置设定 4–8 位家长密码。</p></div></div>
+          <div class="step-row"><div class="step-dot">4</div><div><h3>打开守护，扫码管理</h3><p>回首页点「立即出题」试一轮，确认浮层正常；再到家长设置 → 扫码管理，用手机扫码打开控制台。</p></div></div>
+          <div class="callout warn">
+            <svg class="icon"><use href="#i-info"></use></svg>
+            <div><strong>小米 / MIUI 电视盒子请特别注意</strong><p>系统默认不授予「显示悬浮窗」权限，不开启就不会弹出答题浮层，也不会有远程锁屏。路径：设置 → 应用 → 学时兑 → 权限 → 显示悬浮窗 → 允许。首次点「立即出题」若提示「题库暂不可用」，等题库复制完再点一次即可。</p></div>
+          </div>
+          <div class="callout info guard-install-note">
+            <svg class="icon"><use href="#i-shield"></use></svg>
+            <div><strong>不想每次手动？交给「学时兑守护」</strong><p>手机端守护 App 会在安装后自动放行悬浮窗、加入电池白名单、开通开机自启与防休眠，并每约 10 秒检查学时兑是否被系统杀掉、掉了自动拉起；首次连接记得在电视上勾选「始终允许」。用守护 App 时请先断开电脑上的 ADB 连接。详见 <a class="inline-link" href="#guard">守护 App 专区</a> 与下方 <a class="inline-link" href="#permissions">权限清单</a>。</p></div>
+          </div>
+        </div>
+
+        <div class="card method-card reveal" data-delay="1">
+          <div class="method-head"><h3>选择安装方式</h3><span>4 种任选</span></div>
+          <div class="method-tabs" role="tablist" aria-label="安装方式">
+            <button class="tab active" data-method="usb" role="tab" aria-selected="true">U 盘</button>
+            <button class="tab" data-method="cast" role="tab" aria-selected="false">手机投送</button>
+            <button class="tab" data-method="adb" role="tab" aria-selected="false">ADB</button>
+            <button class="tab" data-method="guard" role="tab" aria-selected="false">守护 App</button>
+          </div>
+          <div class="method-panel active" data-method-panel="usb">
+            <ol class="method-list">
+              <li>把 <code>XsdAnser-v30-ui.apk</code> 拷进 U 盘根目录。</li>
+              <li>U 盘插到电视 / 盒子，打开「文件管理器」或「高清播放器」找到它。</li>
+              <li>首次安装会提示「未知来源」，按系统提示允许一次。</li>
+              <li>安装完成后回到桌面，打开「学时兑」。</li>
+            </ol>
+            <div class="method-note">没有文件管理器的电视，可先在应用商店装一个「当贝市场 / 文件管理器」。</div>
+          </div>
+          <div class="method-panel" data-method-panel="cast">
+            <ol class="method-list">
+              <li>手机与电视连同一个 Wi-Fi。</li>
+              <li>用「小米电视助手 / 当贝市场 / 电视应用助手」等工具的「远程安装 / 手机传文件」功能，把 APK 推送到电视。</li>
+              <li>电视端确认安装，按提示允许未知来源。</li>
+              <li>装好后在桌面打开「学时兑」。</li>
+            </ol>
+            <div class="method-note">不同品牌电视入口名称略有差别，找「远程安装」「推送安装」「本地应用」即可。</div>
+          </div>
+          <div class="method-panel" data-method-panel="adb">
+            <ol class="method-list">
+              <li>盒子：设置 → 关于 → 连点「版本号 / 产品型号」7 次开启开发者选项，打开「USB 调试 / 网络 ADB 调试」。各品牌入口差异见下方「<a class="inline-link" href="#adb">不同品牌如何开启 ADB 调试</a>」。</li>
+              <li>电脑安装 Android platform-tools，从 <a class="inline-link" href="https://xsd.qx47.com/" target="_blank" rel="noopener">官网</a> 下载 <code>XsdAnser-v30-ui.apk</code> 到当前目录。</li>
+              <li>执行下面的命令：连接 → 安装 → 授权「显示悬浮窗」。</li>
+            </ol>
+            <div class="code-block">
+              <button class="copy-btn" data-copy="adb connect 电视IP:5555&#10;adb install -r -d XsdAnser-v30-ui.apk&#10;adb shell appops set com.xsdanser.tv SYSTEM_ALERT_WINDOW allow" aria-label="复制命令"><svg class="icon"><use href="#i-copy"></use></svg><span>复制</span></button>
+              <pre><code>adb connect 电视IP:5555
+adb install -r -d XsdAnser-v30-ui.apk
+adb shell appops set com.xsdanser.tv SYSTEM_ALERT_WINDOW allow</code></pre>
+            </div>
+            <div class="method-note">把「电视IP」换成盒子的局域网 IP。<code>install -r -d</code> 仅适用于同包名覆盖（保留家长设置）。完整下载命令、<strong>权限清单</strong>和给豆包 / WorkBuddy 的<strong>安装提示词</strong>见下方 <a class="inline-link" href="#adb">ADB 安装板块</a>。</div>
+          </div>
+          <div class="method-panel" data-method-panel="guard">
+            <ol class="method-list">
+              <li>在安卓手机 / 平板装上 <code>XsdGuardPhone.apk</code>（<a class="inline-link" href="#guard">守护 App 专区</a>，约 113 KB），并让手机与盒子连同一个 Wi-Fi。</li>
+              <li>按下方「<a class="inline-link" href="#adb">ADB 安装</a>」在盒子上开启 USB 调试 / 网络 ADB 调试，记下盒子的局域网 IP。</li>
+              <li>App 里填「设备列表」（把默认 <code>小米电视|192.168.31.9:5555|1</code> 改成自家 IP）、检测间隔（默认 10 秒）和学时兑下载网址（默认官网直链）。</li>
+              <li>点「连接 ADB」；电视弹出「允许 USB 调试吗」时<b>勾选「始终允许」</b>再点允许，App 会自动循环复核，日志出现「ADB 连接成功」后解锁后续按钮。</li>
+              <li>点「安装学时兑到电视」自动下载并推送安装（已装会提示「学时兑已安装 · 可跳过」），随后点「启动守护」自动补齐权限并开始每 10 秒检测。</li>
+            </ol>
+            <div class="method-note">打开 App 不会自动连接或守护，一切以点「连接 ADB」成功为前提；用完点「断开 ADB」让出盒子唯一的 ADB 连接。功能与权限细节见 <a class="inline-link" href="#guard">守护 App 专区</a> 和 <a class="inline-link" href="#permissions">权限清单</a>。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ADB 安装 / AI 助手 -->
+  <section class="section" id="adb">
+    <div class="container">
+      <div class="section-head center reveal">
+        <div class="kicker">ADB &amp; AI ASSISTANT / 让 AI 帮你装</div>
+        <h2 class="h2">ADB 安装，<span class="grad">复制一句话交给 AI</span></h2>
+        <p class="sub">官网下载 → 连上盒子 → 安装 → 开权限 → 验收。把右边的提示词发给豆包或 WorkBuddy，它会带你一步步做完并核对结果。</p>
+      </div>
+
+      <div class="official-bar reveal">
+        <div class="official-item"><span>官方网址</span><a href="https://xsd.qx47.com/" target="_blank" rel="noopener">https://xsd.qx47.com/</a></div>
+        <div class="official-item"><span>安装包直链</span><code>https://xsd.qx47.com/download/XsdAnser-v30-ui.apk</code></div>
+        <div class="official-item"><span>守护 App 直链</span><code>https://xsd.qx47.com/download/XsdGuardPhone.apk</code></div>
+        <button class="btn btn-ghost btn-sm" id="copyUrl" aria-label="复制安装包直链"><svg class="icon"><use href="#i-copy"></use></svg><span>复制直链</span></button>
+      </div>
+
+      <div class="adb-grid">
+        <div class="adb-left">
+          <div class="card brand-card reveal">
+            <div class="adb-card-head"><h3>不同品牌 · 如何开启 ADB 调试</h3><span>通用前置步骤</span></div>
+            <p class="brand-intro">先在「设置 → 关于 / 关于本机」里连点<b>「版本号 / 内部版本号 / 产品型号」7 次</b>开启开发者选项；进入开发者选项后打开 <b>USB 调试</b>，要走无线再把<b>「网络调试 / ADB over network」</b>打开。下面是各品牌的入口差异：</p>
+            <div class="brand-table">
+              <div class="brand-row brand-head"><span>品牌</span><span>开启 ADB 调试的路径</span></div>
+              <div class="brand-row"><span><b>小米 / Redmi</b></span><span>设置 → 关于 → 连点「产品型号」→ 开发者选项</span></div>
+              <div class="brand-row"><span><b>TCL / 雷鸟</b></span><span>设置 → 关于 → 本机信息 → 遥控器按「上 下 左 右」→ 底部「更多」→ ADB</span></div>
+              <div class="brand-row"><span><b>索尼</b></span><span>设置 → 设备偏好设置 → 关于 → 连点「内部版本号」7 次</span></div>
+              <div class="brand-row"><span><b>海信 / Vidda</b></span><span>关于页面开启开发者选项，部分型号有专门菜单</span></div>
+              <div class="brand-row"><span><b>创维 / 酷开</b></span><span>关于页面或开发者菜单内开启</span></div>
+              <div class="brand-row"><span><b>康佳 / 长虹 / OPPO</b></span><span>按具体型号在「设置 → 系统 → 关于本机」中找开发者选项 / 按键组合</span></div>
+            </div>
+            <div class="callout info conn-callout">
+              <svg class="icon"><use href="#i-wifi"></use></svg>
+              <div><strong>三种连接方式，任选其一</strong>
+                <ul class="conn-list">
+                  <li><b>无线（推荐）</b>：电视开 USB 调试 + 网络调试，电脑执行 <code>adb connect 电视IP:5555</code>。</li>
+                  <li><b>有线</b>：USB 双公头线（A-A）连接电脑与电视，<code>adb devices</code> 识别。</li>
+                  <li><b>配对码（Android 11+）</b>：开发者选项 → 无线调试 → 使用配对码配对，<code>adb pair IP:端口</code> 后输入 6 位码再 connect。</li>
+                </ul>
+                <p>第一次连接电视会弹「允许 USB 调试 / 网络调试」，**点确定**，否则后面一直是 <code>unauthorized</code>。</p>
+              </div>
+            </div>
+          </div>
+          <div class="card adb-card reveal">
+            <div class="adb-card-head"><h3>ADB 安装四步</h3><span>Windows / macOS / Linux</span></div>
+            <ol class="adb-steps">
+              <li>
+                <strong><span class="step-badge">1</span> 盒子上开启 ADB 调试</strong>
+                <p>设置 → 关于本机 → 连点「版本号」7 次 → 返回「开发者选项」→ 打开 <b>USB 调试 / 网络 ADB 调试</b>；再到「网络」里记下盒子的局域网 IP。</p>
+              </li>
+              <li>
+                <strong><span class="step-badge">2</span> 从官网下载安装包</strong>
+                <p>在 <a class="inline-link" href="https://xsd.qx47.com/" target="_blank" rel="noopener">https://xsd.qx47.com/</a> 点「下载 v2.03」，或用命令行下载（约 2.6 MB）：</p>
+                <div class="code-block compact" id="adbDownloadCmd">
+                  <button class="copy-btn" data-copy-from="#adbDownloadCmd" aria-label="复制下载命令"><svg class="icon"><use href="#i-copy"></use></svg><span>复制</span></button>
+                  <pre><code># Windows PowerShell
+Invoke-WebRequest -Uri "https://xsd.qx47.com/download/XsdAnser-v30-ui.apk" -OutFile "XsdAnser-v30-ui.apk"
+# macOS / Linux
+curl -L -o XsdAnser-v30-ui.apk https://xsd.qx47.com/download/XsdAnser-v30-ui.apk</code></pre>
+                </div>
+              </li>
+              <li>
+                <strong><span class="step-badge">3</span> 连接并安装</strong>
+                <p>电脑与盒子连同一个 Wi-Fi；<code>connect</code> 不要带 <code>-s</code>，并和后续 adb 操作放在同一条命令里执行。</p>
+                <div class="code-block compact" id="adbInstallCmd">
+                  <button class="copy-btn" data-copy-from="#adbInstallCmd" aria-label="复制连接安装命令"><svg class="icon"><use href="#i-copy"></use></svg><span>复制</span></button>
+                  <pre><code>adb connect 【电视IP】:5555
+adb devices
+adb install -r -d XsdAnser-v30-ui.apk</code></pre>
+                </div>
+              </li>
+              <li>
+                <strong><span class="step-badge">4</span> 授权悬浮窗并验收</strong>
+                <p>「显示悬浮窗」是答题浮层与远程锁屏的前提，装完必须开；然后启动 App，在首页点「立即出题」确认浮层出现。</p>
+                <div class="code-block compact" id="adbVerifyCmd">
+                  <button class="copy-btn" data-copy-from="#adbVerifyCmd" aria-label="复制授权验收命令"><svg class="icon"><use href="#i-copy"></use></svg><span>复制</span></button>
+                  <pre><code>adb shell appops set com.xsdanser.tv SYSTEM_ALERT_WINDOW allow
+adb shell appops get com.xsdanser.tv SYSTEM_ALERT_WINDOW
+adb shell pm path com.xsdanser.tv
+adb shell monkey -p com.xsdanser.tv -c android.intent.category.LAUNCHER 1</code></pre>
+                </div>
+              </li>
+            </ol>
+            <div class="callout warn">
+              <svg class="icon"><use href="#i-info"></use></svg>
+              <div><strong>实机踩过的几个坑</strong><p>① 5555 才是 ADB 端口，小米盒子的 6095 是「小米电视助手」；② 显示 offline 时依次执行 <code>adb kill-server</code> → <code>adb start-server</code> → 重新 connect；③ 首次启动会在后台复制约 5 MB 题库，第一次点「立即出题」若提示「题库暂不可用」，等几秒再点一次；④ 守护服务未导出，别用 <code>am startservice</code> 触发出题，要在首页点按钮。</p></div>
+            </div>
+          </div>
+
+          <div class="card perm-card reveal" id="permissions">
+            <div class="adb-card-head"><h3>需要开通哪些权限</h3><span>逐项核对 · 含守护 App</span></div>
+            <div class="perm-table">
+              <div class="perm-row perm-head"><span>权限 / 开关</span><span>为什么需要</span><span>怎么开</span></div>
+              <div class="perm-row"><span><i class="must">必须</i>开发者选项 / ADB 调试</span><span>电脑才能通过 5555 连上盒子并安装 APK</span><span>设置 → 关于 → 连点版本号 7 次 → 开发者选项 → USB / 网络 ADB 调试</span></div>
+              <div class="perm-row"><span><i class="must">必须</i>显示悬浮窗<br><code>SYSTEM_ALERT_WINDOW</code></span><span>答题浮层、顶部提醒、家长远程锁屏全靠它；不给就不出题</span><span><code>appops set com.xsdanser.tv SYSTEM_ALERT_WINDOW allow</code>，或 设置 → 应用 → 学时兑 → 显示悬浮窗</span></div>
+              <div class="perm-row"><span><i class="cond">按需</i>允许未知来源安装</span><span>自签名应用，部分电视会拦截安装</span><span>系统弹窗选「允许 / 仍然安装」；<code>adb install</code> 通常不需要手动开</span></div>
+              <div class="perm-row"><span><i class="rec">建议</i>自启动 / 后台运行</span><span>守护服务要长期计时、到点自动出题</span><span>设置 → 应用 → 学时兑 → 自启动允许、电池设为「无限制」</span></div>
+              <div class="perm-row"><span><i class="cond">条件</i>同一 Wi-Fi 局域网</span><span>网络 ADB 与手机扫码管理都走家里局域网</span><span>电脑、盒子、手机连同一个路由，别用访客网络</span></div>
+              <div class="perm-row"><span><i class="rec">建议</i>家长密码（App 内）</span><span>保护家长设置与扫码管理页</span><span>首次进入「家长设置」设定 4–8 位数字密码</span></div>
+              <div class="perm-group">使用「学时兑守护」时 · 手机端与自动授权（v2.14.3）</div>
+              <div class="perm-row"><span><i class="must">必须</i>守护 App · 电视 ADB 调试<br><code>勾选「始终允许」</code></span><span>守护 App 靠网络 ADB 装包、授权、判活；首次不勾「始终允许」会反复弹窗，App 会循环等待生效</span><span>设置 → 关于 → 连点版本号 7 次 → 开发者选项 → USB / 网络 ADB 调试；首次弹窗勾选「始终允许」再点允许</span></div>
+              <div class="perm-row"><span><i class="auto">自动</i>守护 App · 电视四项权限<br><code>悬浮窗 / 电池白名单 / 自启 / 防休眠</code></span><span>安装后与「启动守护」时自动检测补齐，避免答题浮层被拦、服务被系统回收或重装后权限丢失</span><span>无需手动：App 内部执行 <code>appops set com.xsdanser.tv SYSTEM_ALERT_WINDOW allow</code>、<code>dumpsys deviceidle whitelist +com.xsdanser.tv</code> 等并复核</span></div>
+              <div class="perm-row"><span><i class="rec">建议</i>守护 App · 本机电池优化白名单</span><span>手机息屏后不被省电冻结，10 秒心跳才能持续</span><span>首次启动 App 会自动弹一次系统申请，点「允许」；或 设置 → 电池 → 电池优化 → 选「不优化」</span></div>
+              <div class="perm-row"><span><i class="cond">按需</i>守护 App · 通知权限<br><code>POST_NOTIFICATIONS</code></span><span>Android 13+ 显示守护状态通知与每轮连通检测结果</span><span>系统弹窗允许即可；低版本系统没有该权限，App 会自动跳过</span></div>
+              <div class="perm-row"><span><i class="rec">建议</i>守护 App · 开机自启</span><span>手机重启后自动恢复守护（前提是 ADB 仍连通）</span><span>接收开机广播自动拉起；部分厂商还需在系统设置里放行自启动</span></div>
+              <div class="perm-row"><span><i class="cond">条件</i>守护 App · 同一时间只一条 ADB</span><span>多数盒子只允许一个 ADB 客户端，电脑占用会让 App 连接超时</span><span>用 App 前在电脑执行 <code>adb disconnect 电视IP:5555</code>；电脑要用时先在 App 点「断开 ADB」</span></div>
+            </div>
+            <div class="perm-note"><svg class="icon"><use href="#i-shield"></use></svg><span><strong>这两个 App 都不需要</strong>：Root、外部存储 / 相册、通讯录、定位、相机、麦克风、账号登录。学时兑题库随包内置在应用私有目录，作答记录不上传；守护 App 只通过 ADB 安装 APK、执行授权与查询命令，不读取电视上的文件或隐私数据。</span></div>
+          </div>
+        </div>
+
+        <div class="adb-right">
+          <div class="card prompt-card reveal" data-delay="1">
+            <div class="prompt-head">
+              <div><div class="prompt-kicker">COPY &amp; PASTE / 安装提示词</div><h3>发给豆包 / WorkBuddy</h3></div>
+              <button class="copy-btn copy-prompt" id="copyPrompt" aria-label="复制安装提示词"><svg class="icon"><use href="#i-copy"></use></svg><span>复制提示词</span></button>
+            </div>
+            <div class="prompt-how"><span>① 复制提示词</span><span>② 粘贴给豆包 / WorkBuddy</span><span>③ 按提示开 ADB 调试、告诉它盒子 IP</span></div>
+            <div class="prompt-tabs" role="tablist" aria-label="选择 AI 助手">
+              <button class="tab active" data-prompt="workbuddy" role="tab" aria-selected="true">WorkBuddy</button>
+              <button class="tab" data-prompt="doubao" role="tab" aria-selected="false">豆包</button>
+            </div>
+            <pre class="prompt-box" id="promptBox"><code id="promptText"></code></pre>
+            <div class="prompt-foot"><svg class="icon"><use href="#i-info"></use></svg><span>复制后直接粘贴到 AI 助手对话框。开 ADB 调试、卸载或清空数据等需要你本人操作 / 确认的地方，它会先停下来问你。</span></div>
+          </div>
+          <div class="card prompt-tip reveal" data-delay="1"><svg class="icon"><use href="#i-check"></use></svg><div><strong>装完别忘了</strong><p>① 在 App 里设置 4–8 位家长密码；② 家长设置 → 扫码管理，用同一 Wi-Fi 下的手机扫码打开控制台；③ 想免电脑长期看护，再装手机端「<a class="inline-link" href="#guard">学时兑守护</a>」。</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 常见问题 -->
+  <section class="section section-alt" id="faq">
+    <div class="container faq-grid">
+      <div class="reveal">
+        <div class="kicker">FAQ / 常见问题</div>
+        <h2 class="h2">装之前，<br>你可能想问</h2>
+        <p class="body">下面是实机验证时最容易碰到的几件事。想找不同年级、学期和难度的题库，去「题库下载」页按目录挑；目录里没有的题，可以按需定制。</p>
+        <div class="faq-cta">
+          <a class="btn btn-ghost" href="#download">去下载 <svg class="icon"><use href="#i-arrow"></use></svg></a>
+          <a class="btn btn-outline" href="bank.html">题库下载目录 <svg class="icon"><use href="#i-arrow"></use></svg></a>
+        </div>
+      </div>
+      <div class="faq-list reveal" data-delay="1">
+        <details open><summary>支持哪些设备？<span class="plus"></span></summary><p>适配小米、TCL、创维、索尼等主流智能电视，也能装在电视盒子、投影仪与安卓手机 / 平板上，系统需 Android 5.0 及以上，用原装遥控器方向键 / 确定键（或触屏）即可作答。已在小米盒子 4（Android 6.0.1，1920×1080）上完整验证答题流程，也适配 Android TV 桌面横幅；不同品牌只是「未知来源安装」的入口名称略有差别。</p></details>
+        <details><summary>怎么下载更多题库？没有想要的题怎么办？<span class="plus"></span></summary><p>官网「<a class="inline-link" href="bank.html">题库下载</a>」页按教材版本、年级、学期、学科、等级列出全部题库和下载码。当前已有的 18 套都是「简单」等级，已随 App 内置，下载码用于把同一套题同步到第二台电视、盒子或投影仪。目录里没有的题都可以联系作者定制，完成后会拿到专属下载码；在「家长设置 → 题库信息 → 新增题库」输入下载码，点「下载并导入」即可，重复题会自动跳过。</p></details>
+        <details><summary>可以定制什么样的题目？<span class="plus"></span></summary><p>没有固定菜单，<b>什么题目都可以定制</b>。除了简单 / 中等 / 偏难 / 难四个难度等级，还可以指定：语数英之外的任意学科（科学、物理、化学、生物、历史、地理等）、某一册的某一单元或章节、孩子总错的某个知识点、老师划的复习范围、题量与是否配文字解析，甚至课本页码、错题照片或家长自己编的题。把需求发给作者，确认后出题并给专属下载码；成品按 App 的四选一选择题格式整理，方便遥控器作答。定制语数英之外的学科时，导入后记得在「家长设置 → 学科配比」把「其它」从默认的 0 调大，题目才会被抽到；「知识点范围」里同样有「其它」。详见「<a class="inline-link" href="bank.html#custom">按需定制</a>」。</p></details>
+        <details><summary>点了「立即出题」没有反应？<span class="plus"></span></summary><p>九成是「显示悬浮窗」权限没给：到系统设置里为「学时兑」打开该权限，守护状态会从「已停止」变成「运行中」。另一种情况是首次启动题库还在后台复制，稍等几秒再点一次即可。</p></details>
+        <details><summary>断网还能出题吗？<span class="plus"></span></summary><p>能。简单等级题库随安装包内置在设备里，出题、错题、注音都是本地完成。需要联网的只有三件事：用下载码下载新题库、手机扫码管理（手机与电视同一 Wi-Fi）、打赏页的在线收款码（离线时显示包内兜底图）。</p></details>
+        <details><summary>孩子能自己把设置改掉吗？<span class="plus"></span></summary><p>家长设置由 4–8 位数字密码保护；扫码管理页也在密码之后，且二维码里的一次性令牌每次打开都会刷新、退出应用即失效。请不要把二维码截图转发给他人。</p></details>
+        <details><summary>默认参数是什么？能改吗？<span class="plus"></span></summary><p>默认每 10 分钟出题、每轮 1 题、每题可得 1 分钟，答错停留 30 秒，中文注音默认关闭。这些都能在家长设置或手机控制台里调整；后续同包名版本覆盖安装时会保留家长自定义的值（跨包名升级不保留，见上一条）。</p></details>
+        <details><summary>扫码管理页打不开怎么办？<span class="plus"></span></summary><p>确认手机与电视在同一个 Wi-Fi（不要连访客网络）；二维码令牌每次打开扫码页都会重新生成，请用电视上当前显示的码重新扫；离开应用后旧地址会失效。</p></details>
+        <details><summary>不想用电脑，能用手机装并长期守护吗？<span class="plus"></span></summary><p>可以。把「<a class="inline-link" href="#guard">学时兑守护</a>」v2.14.3（约 113 KB）装在安卓手机 / 平板上，填好盒子的 IP 与端口，点「连接 ADB」并在电视上勾选「始终允许」；之后点「安装学时兑到电视」会自动从官网下载并推送安装，安装后与「启动守护」时自动补齐悬浮窗、电池白名单、自启、防休眠，每约 10 秒检查一次，学时兑被杀会自动拉起；发现被卸载会自动下载安装包装回并唤醒。电视已装学时兑时会提示「可跳过安装」。注意多数盒子同一时间只允许一条 ADB 连接，用 App 前请先断开电脑上的 adb。</p></details>
+        <details><summary>可以让 AI 助手帮我用 ADB 装吗？<span class="plus"></span></summary><p>可以。上面「ADB 安装」板块里准备了给豆包和 WorkBuddy 的安装提示词，复制过去即可；它会从 <a class="inline-link" href="https://xsd.qx47.com/" target="_blank" rel="noopener">官网</a> 下载安装包、连上盒子、安装、授予「显示悬浮窗」权限并逐项验收，涉及卸载等不可逆操作会先征求你的确认。</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 下载 -->
+  <section class="section download-section" id="download">
+    <div class="container">
+      <div class="download-card reveal">
+        <div class="dl-glow" aria-hidden="true"></div>
+        <div class="dl-left">
+          <img class="dl-logo" src="assets/img/logo.png" alt="学时兑图标">
+          <div>
+            <div class="dl-kicker">现在就给电视加个约定</div>
+            <h2>学时兑 <span class="dl-ver">v2.03</span></h2>
+            <p class="dl-sub">看电视 · 答个题 · 有约定</p>
+            <div class="dl-meta">
+              <span>更新于 2026-11-16</span><span>2,717,245 B</span><span>com.xsdanser.tv</span><span>Android 5.0+</span><span>电视 / 盒子 / 投影仪</span>
+            </div>
+          </div>
+        </div>
+        <div class="dl-right">
+          <a class="btn btn-primary btn-lg" href="download/XsdAnser-v30-ui.apk" download>
+            <svg class="icon"><use href="#i-download"></use></svg> 下载 APK
+          </a>
+          <a class="btn btn-outline btn-lg" href="#install">先看安装说明</a>
+          <div class="dl-sign">签名 SHA-256 <code>f1224e80…58c693d</code></div>
+          <a class="dl-official" href="bank.html">题库下载目录与定制说明 <svg class="icon"><use href="#i-arrow"></use></svg></a>
+          <a class="dl-official" href="https://xsd.qx47.com/" target="_blank" rel="noopener">官方站点 xsd.qx47.com <svg class="icon"><use href="#i-arrow"></use></svg></a>
+        </div>
+      </div>
+
+      <div class="guard-dl-bar reveal">
+        <div class="guard-dl-icon"><svg class="icon"><use href="#i-shield"></use></svg></div>
+        <div class="guard-dl-copy">
+          <div class="guard-dl-title">学时兑守护 <span class="dl-ver">v2.14.3</span><small>手机端配套工具 · 可选安装</small></div>
+          <p>不用电脑：Wi-Fi ADB 连接 → 自动下载安装学时兑 → 自动开权限 → 每 10 秒检测并拉起。电视已装学时兑可跳过安装。</p>
+          <div class="guard-dl-meta"><span>116,014 B</span><span>com.xsdanser.guard</span><span>Android 5.0+</span><span>手机 / 平板 / 备用盒子</span><span>签名 SHA-256 <code>f1224e80…58c693d</code></span></div>
+        </div>
+        <div class="guard-dl-actions">
+          <a class="btn btn-primary" href="download/XsdGuardPhone.apk" download><svg class="icon"><use href="#i-download"></use></svg> 下载守护 App</a>
+          <a class="btn btn-outline" href="#guard">功能与使用说明 <svg class="icon"><use href="#i-arrow"></use></svg></a>
+        </div>
+      </div>
+
+      <p class="download-note">自签名应用，安装时系统提示「未知来源」属正常现象；适配小米、TCL、创维、索尼等主流智能电视，也能装在电视盒子与投影仪上。需要更多题目请到「题库下载」页按下载码导入，也可以按需定制任意学科、单元或知识点的专属题库。本工具是家庭学习约定辅助工具，不替代陪伴与沟通，请合理安排孩子的用眼与休息时间。</p>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <a class="brand" href="#top"><img src="assets/img/logo.png" alt="学时兑图标"><span class="brand-text">学时兑<small>XSDANSER</small></span></a>
+      <p>为一块更讲道理的屏幕而做。</p>
+    </div>
+    <nav class="footer-links" aria-label="页脚导航">
+      <a href="#intro">产品介绍</a><a href="#features">功能亮点</a><a href="bank.html">题库下载</a><a href="#screens">界面一览</a><a href="#guard">守护 App</a><a href="#install">安装说明</a><a href="#adb">ADB 安装</a><a href="#faq">常见问题</a><a href="#download">下载</a>
+    </nav>
+  </div>
+  <div class="container footer-bottom">
+    <span>© <span id="year">2026</span> 学时兑 · XsdAnser</span>
+    <span>适配小米 / TCL / 创维 / 索尼等电视 · 盒子 · 投影仪 ｜ 题库与出题在设备本地 · 家长管理仅限家庭局域网</span>
+  </div>
+</footer>
+
+<a class="to-top" id="toTop" href="#top" aria-label="回到顶部"><svg class="icon"><use href="#i-arrow"></use></svg></a>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

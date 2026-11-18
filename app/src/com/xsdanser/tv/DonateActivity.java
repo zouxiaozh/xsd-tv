@@ -71,10 +71,10 @@ public class DonateActivity extends Activity {
         root.setBackgroundColor(Ui.BG);
         root.setPadding(Ui.dp(this, 56), Ui.dp(this, 22), Ui.dp(this, 56), Ui.dp(this, 16));
 
-        root.addView(Ui.tv(this, "请开发者喝一杯咖啡", 26, 0xFFFFFFFF, Gravity.LEFT),
+        root.addView(Ui.tv(this, "请作者喝一杯咖啡", 26, 0xFFFFFFFF, Gravity.LEFT),
                 Ui.fixed(this, 42));
         TextView intro = Ui.tv(this,
-                "如果 XsdAnser 帮你把电视时间管起来了，可以请开发者喝一杯咖啡。完全自愿，"
+                "如果 XsdAnser 帮你把电视时间管起来了，可以请作者喝一杯咖啡。完全自愿，"
                         + "不影响任何功能；本页收款码在线加载，不发起支付、不接触金额与账号。",
                 15, Ui.MUTED, Gravity.LEFT);
         intro.setLineSpacing(0, 1.15f);

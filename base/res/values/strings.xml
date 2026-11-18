@@ -5,4 +5,5 @@
     <string name="guard_channel">学时兑</string>
     <string name="guard_notification_text">到点会弹出全屏答题页</string>
     <string name="guard_notification_title">学时兑运行中</string>
+    <string name="keepalive_acc_desc">学时兑常驻守护服务，用于恢复答题提醒，不读取任何屏幕内容。</string>
 </resources>

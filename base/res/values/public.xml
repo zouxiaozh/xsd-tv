@@ -11,4 +11,6 @@
     <public type="string" name="guard_notification_text" id="0x7f020003" />
     <public type="string" name="guard_notification_title" id="0x7f020004" />
     <public type="xml" name="network_security_config" id="0x7f030000" />
+    <public type="color" name="app_bg" id="0x7f040000" />
+    <public type="style" name="AppTheme" id="0x7f050000" />
 </resources>
